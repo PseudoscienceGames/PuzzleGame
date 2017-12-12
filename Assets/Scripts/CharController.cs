@@ -22,7 +22,17 @@ public class CharController : MonoBehaviour
 			holding = false;
 		if (holding)
 		{
-
+			if (Input.GetButtonDown("Vertical"))
+			{
+				if (Input.GetAxis("Vertical") > 0)
+					StartCoroutine("MoveForward");
+				if (Input.GetAxis("Vertical") < 0)
+					StartCoroutine("MoveBackward");
+			}
+			if (Input.GetAxis("Hori") > 0)
+				StartCoroutine("MoveForward");
+			if (Input.GetAxis("Vertical") < 0)
+				StartCoroutine("MoveBackward");
 		}
 		else
 		{
@@ -37,7 +47,15 @@ public class CharController : MonoBehaviour
 
 	void CheckForMovableBlock()
 	{
-
-		holding = true;
+		Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+		RaycastHit hit;
+		if(Physics.Raycast(ray, out hit, 1f))
+		{
+			if (hit.transform.tag == "Movable")
+			{
+				holding = true;
+				transform.position = new Vector3(Mathf.Round(transform.position.x), transform.position.y, Mathf.Round(transform.position.z));
+			}
+		}
 	}
 }
