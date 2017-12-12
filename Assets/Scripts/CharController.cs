@@ -8,6 +8,8 @@ public class CharController : MonoBehaviour
 	public Vector3 mov;
 	private CharacterController c;
 	public bool holding = false;
+	public Transform h;
+	public bool movF = false;
 
 	private void Start()
 	{
@@ -19,20 +21,26 @@ public class CharController : MonoBehaviour
 		if (Input.GetMouseButtonDown(0))
 			CheckForMovableBlock();
 		if (Input.GetMouseButtonUp(0))
+		{
 			holding = false;
+			transform.parent = null;
+		}
 		if (holding)
 		{
 			if (Input.GetButtonDown("Vertical"))
 			{
 				if (Input.GetAxis("Vertical") > 0)
-					StartCoroutine("MoveForward");
+					h.GetComponent<BlockBase>().StartMove(FindForward(transform.position, h.transform.position));
 				if (Input.GetAxis("Vertical") < 0)
-					StartCoroutine("MoveBackward");
+					h.GetComponent<BlockBase>().StartMove(-FindForward(transform.position, h.transform.position));
 			}
-			if (Input.GetAxis("Hori") > 0)
-				StartCoroutine("MoveForward");
-			if (Input.GetAxis("Vertical") < 0)
-				StartCoroutine("MoveBackward");
+			if (Input.GetButtonDown("Horizontal"))
+			{
+				if (Input.GetAxis("Horizontal") > 0)
+					h.GetComponent<BlockBase>().StartTurn(-Vector3.up);
+				if (Input.GetAxis("Horizontal") < 0)
+					h.GetComponent<BlockBase>().StartTurn(Vector3.up);
+			}
 		}
 		else
 		{
@@ -55,7 +63,15 @@ public class CharController : MonoBehaviour
 			{
 				holding = true;
 				transform.position = new Vector3(Mathf.Round(transform.position.x), transform.position.y, Mathf.Round(transform.position.z));
+				h = hit.transform;
+				transform.parent = h;
 			}
 		}
+	}
+
+	Vector3 FindForward(Vector3 cPos, Vector3 hPos)
+	{
+		Vector3 dir = new Vector3(hPos.x - cPos.x, 0, hPos.z - cPos.z);
+		return dir;
 	}
 }
