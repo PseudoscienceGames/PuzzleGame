@@ -4,17 +4,22 @@ using UnityEngine;
 
 public class BlockBase : MonoBehaviour
 {
+	private bool moving;
+
 	public void StartMove(Vector3 dir)
 	{
-		StartCoroutine("Move", dir);
+		if(!moving)
+			StartCoroutine("Move", dir);
 	}
 	public void StartTurn(Vector3 dir)
 	{
-		StartCoroutine("Turn", dir);
+		if(!moving)
+			StartCoroutine("Turn", dir);
 	}
 
 	IEnumerator Move(Vector3 dir)
 	{
+		moving = true;
 		float amt = 0;
 		Vector3 initPos = transform.position;
 		while (amt < 1)
@@ -25,10 +30,12 @@ public class BlockBase : MonoBehaviour
 			transform.position = Vector3.Lerp(initPos, initPos + dir, amt);
 			yield return null;
 		}
+		moving = false;
 		yield return null;
 	}
 	IEnumerator Turn(Vector3 dir)
 	{
+		moving = true;
 		dir *= 90;
 		float amt = 0;
 		Vector3 initRot = transform.eulerAngles;
@@ -40,6 +47,7 @@ public class BlockBase : MonoBehaviour
 			transform.eulerAngles = Vector3.Lerp(initRot, initRot + dir, amt);
 			yield return null;
 		}
+		moving = false;
 		yield return null;
 	}
 }

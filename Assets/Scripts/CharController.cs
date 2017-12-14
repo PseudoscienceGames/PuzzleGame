@@ -9,30 +9,37 @@ public class CharController : MonoBehaviour
 	private CharacterController c;
 	public bool holding = false;
 	public Transform h;
-	public bool movF = false;
+	public bool moving = false;
 
 	private void Start()
 	{
 		c = GetComponent<CharacterController>();
 	}
 
-	void Update ()
+	void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 			CheckForMovableBlock();
 		if (Input.GetMouseButtonUp(0))
 		{
 			holding = false;
-			transform.parent = null;
 		}
-		if (holding)
+		if (holding && !moving)
 		{
 			if (Input.GetButtonDown("Vertical"))
 			{
 				if (Input.GetAxis("Vertical") > 0)
-					h.GetComponent<BlockBase>().StartMove(FindForward(transform.position, h.transform.position));
+				{
+					Vector3 dir = FindForward(transform.position, h.transform.position);
+					h.GetComponent<BlockBase>().StartMove(dir);
+					StartCoroutine("Move", dir);
+				}
 				if (Input.GetAxis("Vertical") < 0)
-					h.GetComponent<BlockBase>().StartMove(-FindForward(transform.position, h.transform.position));
+				{
+					Vector3 dir = -FindForward(transform.position, h.transform.position);
+					h.GetComponent<BlockBase>().StartMove(dir);
+					StartCoroutine("Move", dir);
+				}
 			}
 			if (Input.GetButtonDown("Horizontal"))
 			{
@@ -57,14 +64,13 @@ public class CharController : MonoBehaviour
 	{
 		Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
 		RaycastHit hit;
-		if(Physics.Raycast(ray, out hit, 1f))
+		if (Physics.Raycast(ray, out hit, 1f))
 		{
 			if (hit.transform.tag == "Movable")
 			{
 				holding = true;
 				transform.position = new Vector3(Mathf.Round(transform.position.x), transform.position.y, Mathf.Round(transform.position.z));
 				h = hit.transform;
-				transform.parent = h;
 			}
 		}
 	}
@@ -72,6 +78,25 @@ public class CharController : MonoBehaviour
 	Vector3 FindForward(Vector3 cPos, Vector3 hPos)
 	{
 		Vector3 dir = new Vector3(hPos.x - cPos.x, 0, hPos.z - cPos.z);
+		if (Mathf.Abs(dir.x + dir.y + dir.z) != 1)
+			Debug.Log("Somethings fucked" + dir);
 		return dir;
+	}
+
+	IEnumerator Move(Vector3 dir)
+	{
+		moving = true;
+		float amt = 0;
+		Vector3 initPos = transform.position;
+		while (amt < 1)
+		{
+			amt += Time.deltaTime;
+			if (amt > 1)
+				amt = 1;
+			transform.position = Vector3.Lerp(initPos, initPos + dir, amt);
+			yield return null;
+		}
+		moving = false;
+		yield return null;
 	}
 }
