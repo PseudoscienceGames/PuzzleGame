@@ -35,31 +35,19 @@ public class CameraControl : MonoBehaviour
 		{
 			transform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * cameraRotSpeed * Time.deltaTime, Space.Self);
 			cameraPivot.transform.Rotate(-Vector3.right, Input.GetAxis("Mouse Y") * cameraRotSpeed * Time.deltaTime);
-		}
-		else if (screenEdgeScroll)
-		{
-			if (Input.mousePosition.x < scrollAreaSize)
-				transform.position -= transform.right * camPanSpeed;
-			if (Input.mousePosition.x > Camera.main.pixelWidth - scrollAreaSize)
-				transform.position += transform.right * camPanSpeed;
-			if (Input.mousePosition.y < scrollAreaSize)
-				transform.position -= transform.forward * camPanSpeed;
-			if (Input.mousePosition.y > Camera.main.pixelHeight - scrollAreaSize)
-				transform.position += transform.forward * camPanSpeed;
-		}
-
-		//Zoom camera
-		zoom = -Camera.main.transform.localPosition.z;
-		if (zoom > zoomMin && zoom < zoomMax)
-		{
-			if (Camera.main.orthographic)
-				Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-			else
+			//Zoom camera
+			zoom = -Camera.main.transform.localPosition.z;
+			if (zoom > zoomMin && zoom < zoomMax)
 			{
-				zoom += -(Input.GetAxisRaw("Mouse ScrollWheel")) * zoomSpeed * zoom;
-				if (zoom > zoomMin && zoom < zoomMax)
+				if (Camera.main.orthographic)
+					Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+				else
 				{
-					Camera.main.transform.localPosition = new Vector3(0, 0, -zoom);
+					zoom += -(Input.GetAxisRaw("Mouse ScrollWheel")) * zoomSpeed * zoom;
+					if (zoom > zoomMin && zoom < zoomMax)
+					{
+						Camera.main.transform.localPosition = new Vector3(0, 0, -zoom);
+					}
 				}
 			}
 		}
