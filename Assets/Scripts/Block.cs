@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BlockBase : MonoBehaviour
+public class Block : MonoBehaviour
 {
 	private bool moving;
 
@@ -31,7 +31,7 @@ public class BlockBase : MonoBehaviour
 			yield return null;
 		}
 		moving = false;
-		yield return null;
+		//yield return null;
 	}
 	IEnumerator Turn(Vector3 dir)
 	{
@@ -48,6 +48,15 @@ public class BlockBase : MonoBehaviour
 			yield return null;
 		}
 		moving = false;
-		yield return null;
+		//yield return null;
+	}
+
+	public virtual void Act()
+	{
+		StopAllCoroutines();
+		transform.position = new Vector3(Mathf.Round(transform.position.x),
+										 Mathf.Round(transform.position.y),
+										 Mathf.Round(transform.position.z));
+		moving = false;
 	}
 }
