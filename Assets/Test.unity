@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -458,6 +458,8 @@ MonoBehaviour:
   - {fileID: 1500784387914312, guid: 4cd2e7457f1647b4f9677db8b85d22b2, type: 2}
   - {fileID: 1651723049157302, guid: 36355eff5b9085b45add5dc66fddee74, type: 2}
   selected: 0
+  loc: {x: 0, y: 0, z: 0}
+  smoothTime: 0.01
 --- !u!23 &1649574138
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -587,12 +589,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46345ceed831b4446a21ab32cf2e3e66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zoom: 5
+  zoom: 10
+  targetZoom: 10
   zoomMin: 0
   zoomMax: 100
-  zoomSpeed: 5
-  cameraRotSpeed: 200
-  camPanSpeed: 5
+  zoomSpeed: 20
+  cameraRotSpeed: 10
+  camPanSpeed: 1
   scrollAreaSize: 0
   screenEdgeScroll: 0
   cameraPivot: {fileID: 1238850553}
@@ -600,7 +603,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   oldPos: {x: 0, y: 0, z: 0}
-  smoothTime: 0
+  smoothTime: 0.1
+  rotSmoothTime: 0.1
+  camRotSmoothTime: 0.1
+  zoomSmoothTime: 0.1
+  camXRotMin: 10
+  camXRotMax: 80
 --- !u!4 &1862183961
 Transform:
   m_ObjectHideFlags: 0

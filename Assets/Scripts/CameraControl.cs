@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class CameraControl : MonoBehaviour
 {
 	public float zoom;
+	public float targetZoom;
 	public int zoomMin;
 	public int zoomMax;
 	public float zoomSpeed;
@@ -19,7 +20,16 @@ public class CameraControl : MonoBehaviour
 	public Vector3 oldPos;
 
 	public float smoothTime;
+	public float rotSmoothTime;
+	public float camRotSmoothTime;
+	public float zoomSmoothTime;
 	private Vector3 velocity = Vector3.zero;
+	private Vector3 rVelocity = Vector3.zero;
+	private Vector3 cVelocity = Vector3.zero;
+	private Vector3 zVelocity = Vector3.zero;
+
+	public float camXRotMin;
+	public float camXRotMax;
 
 	public static CameraControl Instance;
 	void Awake() { Instance = this; }
@@ -33,8 +43,17 @@ public class CameraControl : MonoBehaviour
 		//Pivots camera based on mouse movement
 		if (Input.GetMouseButton(1))
 		{
-			transform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * cameraRotSpeed * Time.deltaTime, Space.Self);
-			cameraPivot.transform.Rotate(-Vector3.right, Input.GetAxis("Mouse Y") * cameraRotSpeed * Time.deltaTime);
+			//transform.Rotate(Vector3.up, Input.GetAxis("Mouse X") * cameraRotSpeed * Time.deltaTime, Space.Self);
+			Vector3 targetEuler = transform.eulerAngles + (Vector3.up * Input.GetAxis("Mouse X") * cameraRotSpeed);
+			transform.eulerAngles = Vector3.SmoothDamp(transform.eulerAngles, targetEuler, ref rVelocity, rotSmoothTime);
+			//cameraPivot.transform.Rotate(-Vector3.right, Input.GetAxis("Mouse Y") * cameraRotSpeed * Time.deltaTime);
+			Vector3 camTargetEuler = cameraPivot.transform.eulerAngles + (-Vector3.right * Input.GetAxis("Mouse Y") * cameraRotSpeed);
+			camTargetEuler = Vector3.SmoothDamp(cameraPivot.transform.eulerAngles, camTargetEuler, ref cVelocity, camRotSmoothTime);
+			camTargetEuler.x = Mathf.Clamp(camTargetEuler.x, camXRotMin, camXRotMax);
+			cameraPivot.transform.eulerAngles = camTargetEuler;
+		}
+		else
+		{
 			//Zoom camera
 			zoom = -Camera.main.transform.localPosition.z;
 			if (zoom > zoomMin && zoom < zoomMax)
@@ -43,11 +62,13 @@ public class CameraControl : MonoBehaviour
 					Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
 				else
 				{
-					zoom += -(Input.GetAxisRaw("Mouse ScrollWheel")) * zoomSpeed * zoom;
-					if (zoom > zoomMin && zoom < zoomMax)
-					{
-						Camera.main.transform.localPosition = new Vector3(0, 0, -zoom);
-					}
+					targetZoom += -(Input.GetAxisRaw("Mouse ScrollWheel")) * zoomSpeed;
+					if (targetZoom > zoomMax)
+						targetZoom = zoomMax;
+					if (targetZoom < zoomMin)
+						targetZoom = zoomMin;
+					Vector3 zoomV = new Vector3(0, 0, -targetZoom);
+					Camera.main.transform.localPosition = Vector3.SmoothDamp(Camera.main.transform.localPosition, zoomV, ref zVelocity, zoomSmoothTime);
 				}
 			}
 		}
