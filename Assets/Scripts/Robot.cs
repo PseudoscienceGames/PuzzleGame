@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Robot : Block
 {
-	public override void Act()
-	{
-		base.Act();
-		StartMove(transform.forward);
-	}
+	//public override void Act()
+	//{
+	//	base.Act();
+	//	StartMove(transform.forward);
+	//}
 }
