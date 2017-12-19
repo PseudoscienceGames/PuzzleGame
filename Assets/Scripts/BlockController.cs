@@ -34,14 +34,29 @@ public class BlockController : MonoBehaviour
 
 	void Tick()
 	{
+		EndLastMove();
 		powerSources.Clear();
+		string gs = "";
 		foreach (Block b in blocks.Values)
 		{
+			gs += b.gridLoc;
+			b.powered = false;
 			if (b.powerSource)
 				powerSources.Add(b);
 		}
+		Debug.Log(gs);
 		PowerGrid();
+		Act();
 
+	}
+
+	void EndLastMove()
+	{
+		foreach(Block b in blocks.Values)
+		{
+			if (b.moving)
+				b.EndMove();
+		}
 	}
 
 	void PowerGrid()
@@ -68,6 +83,13 @@ public class BlockController : MonoBehaviour
 			toCheck.Remove(b);
 		}
 	}
-
+	void Act()
+	{
+		foreach(Block b in blocks.Values)
+		{
+			if (b.powered)
+				b.Act();
+		}
+	}
 
 }

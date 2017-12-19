@@ -21,6 +21,10 @@ public struct GridLoc
 		this.y = Mathf.RoundToInt(worldLoc.y);
 		this.z = Mathf.RoundToInt(worldLoc.z);
 	}
+	public Vector3 ToWorld()
+	{
+		return new Vector3(x, y, z);
+	}
 	public List<GridLoc> AdjacentBlocks()
 	{
 		List<GridLoc> a = new List<GridLoc>();
