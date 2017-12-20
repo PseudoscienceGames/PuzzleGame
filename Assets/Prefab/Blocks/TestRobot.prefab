@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4452318517740222}
   - component: {fileID: 33450798206510600}
   - component: {fileID: 23372618336753908}
-  - component: {fileID: 114725527444888034}
+  - component: {fileID: 114056660632665674}
   m_Layer: 0
   m_Name: TestRobot
   m_TagString: Untagged
@@ -83,7 +83,7 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1480757723538934}
   m_Mesh: {fileID: 4300002, guid: 69935d35e5cffde4c966dd5571b908d1, type: 3}
---- !u!114 &114725527444888034
+--- !u!114 &114056660632665674
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -91,6 +91,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1480757723538934}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55b1a081c33abbe45926b0cb9032d379, type: 3}
+  m_Script: {fileID: 11500000, guid: 968e318af125e2d40beabda05c7ecfb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridLoc:
+    x: 0
+    y: 0
+    z: 0
+  takesPower: 0
+  givesPower: 0
+  hasPower: 0

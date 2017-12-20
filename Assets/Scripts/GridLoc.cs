@@ -36,6 +36,10 @@ public struct GridLoc
 		a.Add(this + new GridLoc(-Vector3.right));
 		return a;
 	}
+	public Vector3 ToVector3()
+	{
+		return new Vector3(x, y, z);
+	}
 	public static GridLoc operator +(GridLoc a, GridLoc b)
 	{
 		return new GridLoc(a.x + b.x, a.y + b.y, a.z + b.z);
