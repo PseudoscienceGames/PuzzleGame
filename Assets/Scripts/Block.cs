@@ -10,10 +10,9 @@ public class Block : MonoBehaviour
 	public bool hasPower;
 	public float t;
 
-	private void Start()
+	public virtual void Start()
 	{
 		gridLoc = new GridLoc(transform.position);
-		//StartMove(new GridLoc(transform.forward));
 	}
 
 	public void StartMove(GridLoc dir)
@@ -28,8 +27,7 @@ public class Block : MonoBehaviour
 		t = 0;
 		while (t < 1)
 		{
-			t += Time.deltaTime;
-			Debug.Log(Time.deltaTime);
+			t += Time.deltaTime / GridController.GC.tickTime;
 			transform.position = Vector3.Lerp(initPos, gridLoc.ToVector3(), t);
 			yield return null;
 		}
@@ -40,8 +38,10 @@ public class Block : MonoBehaviour
 	public void EndMove()
 	{
 		StopAllCoroutines();
-		GridController.GC.newGrid.Add(gridLoc, this);
 		transform.position = new GridLoc(transform.position).ToVector3();
+		gridLoc = new GridLoc(transform.position);
+		GridController.GC.newGrid.Add(gridLoc, this);
+		
 		//hasPower = false;
 	}
 

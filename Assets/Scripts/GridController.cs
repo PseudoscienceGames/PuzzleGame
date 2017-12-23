@@ -6,16 +6,18 @@ public class GridController : MonoBehaviour
 {
 	public Dictionary<GridLoc, Block> grid = new Dictionary<GridLoc, Block>();
 	public Dictionary<GridLoc, Block> newGrid = new Dictionary<GridLoc, Block>();
-	//public Dictionary<Block, GridLoc> moves = new Dictionary<Block, GridLoc>();
 	public static GridController GC;
 	private void Awake(){GC = this;}
 	public bool play;
+	public float tickTime = 0.25f;
 
+	//make activated by ui button
 	private void Start()
 	{
 		List<Block> blocks = new List<Block>(GameObject.FindObjectsOfType<Block>());
 		foreach(Block b in blocks)
 		{
+			Debug.Log(b.name);
 			grid.Add(b.gridLoc, b);
 		}
 		StartCoroutine("Tick");
@@ -25,16 +27,10 @@ public class GridController : MonoBehaviour
 	{
 		while (play)
 		{
-			string locs = "";
-			foreach (GridLoc g in grid.Keys)
-			{
-				locs += g.ToString();
-			}
-			Debug.Log("TICK" + locs);
 			FinishLastTick();
 			CheckPowerGrid();
 			Actions();
-			yield return new WaitForSeconds(1);
+			yield return new WaitForSeconds(tickTime);
 		}
 	}
 	void FinishLastTick()

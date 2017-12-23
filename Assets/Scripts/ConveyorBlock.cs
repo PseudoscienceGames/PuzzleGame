@@ -15,7 +15,6 @@ public class ConveyorBlock : Block
 			{
 				Block b = GridController.GC.grid[up];
 				b.StartMove(new GridLoc(transform.forward));
-				//GridController.GC.moves.Add(b, new GridLoc(transform.forward));
 			}
 		}
 	}
