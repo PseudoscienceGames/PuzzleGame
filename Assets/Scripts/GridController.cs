@@ -5,9 +5,11 @@ using UnityEngine;
 public class GridController : MonoBehaviour
 {
 	public Dictionary<GridLoc, Block> grid = new Dictionary<GridLoc, Block>();
-	public Dictionary<Block, GridLoc> moves = new Dictionary<Block, GridLoc>();
+	public Dictionary<GridLoc, Block> newGrid = new Dictionary<GridLoc, Block>();
+	//public Dictionary<Block, GridLoc> moves = new Dictionary<Block, GridLoc>();
 	public static GridController GC;
 	private void Awake(){GC = this;}
+	public bool play;
 
 	private void Start()
 	{
@@ -16,13 +18,34 @@ public class GridController : MonoBehaviour
 		{
 			grid.Add(b.gridLoc, b);
 		}
+		StartCoroutine("Tick");
 	}
 
-	private void FixedUpdate()
+	IEnumerator Tick()
 	{
-		CheckPowerGrid();
-		Actions();
-		Moves();
+		while (play)
+		{
+			string locs = "";
+			foreach (GridLoc g in grid.Keys)
+			{
+				locs += g.ToString();
+			}
+			Debug.Log("TICK" + locs);
+			FinishLastTick();
+			CheckPowerGrid();
+			Actions();
+			yield return new WaitForSeconds(1);
+		}
+	}
+	void FinishLastTick()
+	{ 
+		newGrid.Clear();
+		foreach(Block b in grid.Values)
+		{
+			b.EndMove();
+		}
+
+		grid = new Dictionary<GridLoc, Block>(newGrid);
 	}
 	void CheckPowerGrid()
 	{
@@ -30,18 +53,10 @@ public class GridController : MonoBehaviour
 	}
 	void Actions()
 	{
-		moves.Clear();
 		List<Block> bs = new List<Block>(grid.Values);
 		foreach(Block b in bs)
 		{
 			b.Action();
-		}
-	}
-	void Moves()
-	{
-		foreach(Block b in moves.Keys)
-		{
-			b.Move(moves[b]);
 		}
 	}
 }

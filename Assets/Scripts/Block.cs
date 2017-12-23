@@ -8,19 +8,41 @@ public class Block : MonoBehaviour
 	public bool takesPower;
 	public bool givesPower;
 	public bool hasPower;
+	public float t;
 
 	private void Start()
 	{
 		gridLoc = new GridLoc(transform.position);
+		//StartMove(new GridLoc(transform.forward));
 	}
 
-	public void Move(GridLoc dir)
+	public void StartMove(GridLoc dir)
 	{
-		Debug.Log(name + " " + gridLoc + " " + dir);
-		GridController.GC.grid.Remove(gridLoc);
 		gridLoc += dir;
-		GridController.GC.grid.Add(gridLoc, this);
-		transform.position = gridLoc.ToVector3();
+		StartCoroutine("Move", gridLoc);
+	}
+
+	IEnumerator Move(GridLoc g)
+	{
+		Vector3 initPos = transform.position;
+		t = 0;
+		while (t < 1)
+		{
+			t += Time.deltaTime;
+			Debug.Log(Time.deltaTime);
+			transform.position = Vector3.Lerp(initPos, gridLoc.ToVector3(), t);
+			yield return null;
+		}
+		yield return null;
+	}
+
+
+	public void EndMove()
+	{
+		StopAllCoroutines();
+		GridController.GC.newGrid.Add(gridLoc, this);
+		transform.position = new GridLoc(transform.position).ToVector3();
+		//hasPower = false;
 	}
 
 	public virtual void Action()
