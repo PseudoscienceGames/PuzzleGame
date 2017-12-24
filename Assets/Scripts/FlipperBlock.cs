@@ -35,8 +35,6 @@ public class FlipperBlock : Block
 			}
 			else if (stage == 2)
 			{
-				grabbed.parent = null;
-				grabbed = null;
 				StartCoroutine("Return");
 				stage = 0;
 			}
@@ -55,6 +53,11 @@ public class FlipperBlock : Block
 				t = 1;
 			arm.rotation = Quaternion.Lerp(initRot, targetRot, t);
 			yield return null;
+		}
+		if(stage == 2)
+		{
+			grabbed.parent = null;
+			grabbed = null;
 		}
 		yield return null;
 	}
