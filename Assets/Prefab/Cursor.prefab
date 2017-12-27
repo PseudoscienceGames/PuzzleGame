@@ -95,11 +95,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   availBlocks:
-  - {fileID: 1459182986863388, guid: a005f54b23229614bac74fcc486034f0, type: 2}
-  - {fileID: 1500784387914312, guid: 4cd2e7457f1647b4f9677db8b85d22b2, type: 2}
-  - {fileID: 1651723049157302, guid: 36355eff5b9085b45add5dc66fddee74, type: 2}
-  - {fileID: 1480757723538934, guid: 5f63da5dc6e79ee4785bd7a4704cd05c, type: 2}
-  - {fileID: 1332000510625832, guid: 4600039c4148c4e429c66d22585ff24f, type: 2}
+  - {fileID: 1151623635170654, guid: 5255b737b21ea0544a39f7859f338500, type: 2}
+  - {fileID: 1927705354042514, guid: b049630a75eba0b49a310776344203d8, type: 2}
   selected: 0
   loc: {x: 0, y: 0, z: 0}
   smoothTime: 0.01

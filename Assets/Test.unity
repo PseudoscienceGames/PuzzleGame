@@ -365,7 +365,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   play: 1
-  tickTime: 0.25
+  tickTime: 0.1
 --- !u!4 &782359186
 Transform:
   m_ObjectHideFlags: 0
