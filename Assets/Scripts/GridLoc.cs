@@ -40,6 +40,10 @@ public struct GridLoc
 	{
 		return new Vector3(x, y, z);
 	}
+	public static GridLoc operator -(GridLoc a)
+	{
+		return new GridLoc(-a.x, -a.y, -a.z);
+	}
 	public static GridLoc operator +(GridLoc a, GridLoc b)
 	{
 		return new GridLoc(a.x + b.x, a.y + b.y, a.z + b.z);
