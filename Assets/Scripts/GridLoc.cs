@@ -8,6 +8,12 @@ public struct GridLoc
 	public int x;
 	public int y;
 	public int z;
+	public static GridLoc right = new GridLoc(1, 0, 0);
+	public static GridLoc left = new GridLoc(-1, 0, 0);
+	public static GridLoc up = new GridLoc(0, 1, 0);
+	public static GridLoc down = new GridLoc(0, -1, 0);
+	public static GridLoc forward = new GridLoc(0, 0, 1);
+	public static GridLoc back = new GridLoc(0, 0, -1);
 
 	public GridLoc(int x, int y, int z)
 	{
@@ -28,12 +34,12 @@ public struct GridLoc
 	public List<GridLoc> AdjacentBlocks()
 	{
 		List<GridLoc> a = new List<GridLoc>();
-		a.Add(this + new GridLoc(Vector3.up));
-		a.Add(this + new GridLoc(-Vector3.up));
-		a.Add(this + new GridLoc(Vector3.forward));
-		a.Add(this + new GridLoc(-Vector3.forward));
-		a.Add(this + new GridLoc(Vector3.right));
-		a.Add(this + new GridLoc(-Vector3.right));
+		a.Add(this + GridLoc.up);
+		a.Add(this + GridLoc.down);
+		a.Add(this + GridLoc.forward);
+		a.Add(this + GridLoc.back);
+		a.Add(this + GridLoc.right);
+		a.Add(this + GridLoc.back);
 		return a;
 	}
 	public Vector3 ToVector3()

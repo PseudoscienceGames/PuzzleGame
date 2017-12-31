@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Side
 {
-	Block b;
-	GridLoc localSide;
+	public Block b;
+	public GridLoc localSide;
 	public SideType sType;
 
 	public Side(SideType s, Block p, GridLoc g)
@@ -17,11 +17,12 @@ public class Side
 
 	public Side FindAdjacentSide()
 	{
-		Side s;
-		GridLoc g = b.gridLoc + localSide;
+		GridLoc g = b.gridLoc + b.FindWorldSideGridLoc(localSide);
 		if (GridController.instance.grid.ContainsKey(g))
 		{
-			s = GridController.instance.grid[g].FindWorldSide(-localSide);
+			Block nB = GridController.instance.grid[g];
+			Debug.Log(g + " " + nB.FindLocalSideGridLoc(g));
+			Side s = nB.sides[nB.FindLocalSideGridLoc(g)];
 			return s;
 		}
 		else

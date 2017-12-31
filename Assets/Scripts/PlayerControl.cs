@@ -22,7 +22,7 @@ public class PlayerControl : MonoBehaviour
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 500))
 		{
 			pos = hit.point + (hit.normal * 0.5f);
-			loc = new Vector3(Mathf.Round(pos.x), Mathf.Round(pos.y), Mathf.Round(pos.z));
+			loc = new GridLoc(transform.position).ToVector3();
 			transform.position = Vector3.SmoothDamp(transform.position, loc, ref velocity, smoothTime);
 
 		}

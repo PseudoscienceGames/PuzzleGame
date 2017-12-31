@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MotorBlock : Block
+public class AxleBlock : Block
 {
 	public Transform axle;
 
@@ -10,6 +10,7 @@ public class MotorBlock : Block
 	{
 		base.AddSides();
 		sides[GridLoc.up].sType = SideType.Axle;
+		sides[GridLoc.down].sType = SideType.Axle;
 	}
 
 	public override void Action(GridLoc g)
@@ -18,6 +19,10 @@ public class MotorBlock : Block
 		Side s = sides[GridLoc.up].FindAdjacentSide();
 		if (s != null && s.sType == SideType.Axle && !s.b.active)
 			s.b.Action(g);
+		s = sides[GridLoc.down].FindAdjacentSide();
+		if (s != null && s.sType == SideType.Axle && !s.b.active)
+			s.b.Action(g);
+
 		StartCoroutine("Animate", g);
 	}
 

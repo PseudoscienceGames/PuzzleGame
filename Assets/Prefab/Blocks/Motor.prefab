@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33279671009774070}
   - component: {fileID: 23892619418157918}
   m_Layer: 0
-  m_Name: Axel
+  m_Name: Axle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,5 +212,5 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
-  hasPower: 1
-  Axle: {fileID: 4868985849824498}
+  ss: 0
+  axle: {fileID: 4868985849824498}

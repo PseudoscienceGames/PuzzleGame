@@ -6,6 +6,8 @@ public class Block : MonoBehaviour
 {
 	public GridLoc gridLoc;
 	public Dictionary<GridLoc, Side> sides = new Dictionary<GridLoc, Side>();
+	public bool ss = false;
+	public bool active = false;
 
 	public virtual void Start()
 	{
@@ -15,21 +17,41 @@ public class Block : MonoBehaviour
 	}
 	public virtual void AddSides()
 	{
-		sides.Add(new GridLoc(Vector3.up), new Side(SideType.Base, this, new GridLoc(Vector3.up)));
-		sides.Add(new GridLoc(-Vector3.up), new Side(SideType.Base, this, new GridLoc(-Vector3.up)));
-		sides.Add(new GridLoc(Vector3.right), new Side(SideType.Base, this, new GridLoc(Vector3.right)));
-		sides.Add(new GridLoc(-Vector3.right), new Side(SideType.Base, this, new GridLoc(-Vector3.right)));
-		sides.Add(new GridLoc(Vector3.forward), new Side(SideType.Base, this, new GridLoc(Vector3.forward)));
-		sides.Add(new GridLoc(-Vector3.forward), new Side(SideType.Base, this, new GridLoc(-Vector3.forward)));
+		sides.Add(GridLoc.up, new Side(SideType.Base, this, GridLoc.up));
+		sides.Add(GridLoc.down, new Side(SideType.Base, this, GridLoc.down));
+		sides.Add(GridLoc.right, new Side(SideType.Base, this, GridLoc.right));
+		sides.Add(GridLoc.left, new Side(SideType.Base, this, GridLoc.left));
+		sides.Add(GridLoc.forward, new Side(SideType.Base, this, GridLoc.forward));
+		sides.Add(GridLoc.back, new Side(SideType.Base, this, GridLoc.back));
+		foreach(GridLoc g in sides.Keys)
+		{
+			Debug.Log(g + " " + FindLocalSideGridLoc(g));
+		}
 	}
-	public virtual void Action()
+	public virtual void Action(GridLoc g)
 	{
-
+		active = true;
 	}
 
-	public Side FindWorldSide(GridLoc g)
+	public GridLoc FindWorldSideGridLoc(GridLoc localSide)
 	{
-		g = new GridLoc(Quaternion.Inverse(transform.rotation) * g.ToVector3());
-		return sides[g];
+		GridLoc worldSide = new GridLoc(transform.rotation * localSide.ToVector3());
+		return worldSide;
+	}
+	public GridLoc FindLocalSideGridLoc(GridLoc worldSide)
+	{
+		GridLoc localSide = new GridLoc(Quaternion.Inverse(transform.rotation) * worldSide.ToVector3());
+		return localSide;
+	}
+
+	public virtual void EndLastTick()
+	{
+		StopAllCoroutines();
+		transform.position = new GridLoc(transform.position).ToVector3();
+		Vector3 rot = transform.eulerAngles;
+		rot.x = Mathf.Round(rot.x / 90f) * 90;
+		rot.y = Mathf.Round(rot.y / 90f) * 90;
+		rot.z = Mathf.Round(rot.z / 90f) * 90;
+		transform.eulerAngles = rot;
 	}
 }
