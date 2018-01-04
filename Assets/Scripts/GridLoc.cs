@@ -14,6 +14,7 @@ public struct GridLoc
 	public static GridLoc down = new GridLoc(0, -1, 0);
 	public static GridLoc forward = new GridLoc(0, 0, 1);
 	public static GridLoc back = new GridLoc(0, 0, -1);
+	public static GridLoc zero = new GridLoc(0, 0, 0);
 
 	public GridLoc(int x, int y, int z)
 	{
@@ -39,7 +40,7 @@ public struct GridLoc
 		a.Add(this + GridLoc.forward);
 		a.Add(this + GridLoc.back);
 		a.Add(this + GridLoc.right);
-		a.Add(this + GridLoc.back);
+		a.Add(this + GridLoc.left);
 		return a;
 	}
 	public Vector3 ToVector3()

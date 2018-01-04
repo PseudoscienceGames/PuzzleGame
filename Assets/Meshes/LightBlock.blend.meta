@@ -1,78 +1,23 @@
 fileFormatVersion: 2
-guid: 224fd7a10c945e949b27f6ec10487de5
-timeCreated: 1514956478
+guid: 9b2f400cc27ca404787d5e7b03a095d4
+timeCreated: 1515039787
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
-    100000: Back
-    100002: Base
-    100004: Down
-    100006: Forward
-    100008: Left
-    100010: Right
-    100012: Up
-    100014: //RootNode
-    100016: BackCup
-    100018: DownCup
-    100020: ForwardCup
-    100022: LeftCup
-    100024: RightCup
-    100026: UpCup
-    400000: Back
-    400002: Base
-    400004: Down
-    400006: Forward
-    400008: Left
-    400010: Right
-    400012: Up
-    400014: //RootNode
-    400016: BackCup
-    400018: DownCup
-    400020: ForwardCup
-    400022: LeftCup
-    400024: RightCup
-    400026: UpCup
+    100000: Cube_000
+    100002: Cube_004
+    100004: //RootNode
+    400000: Cube_000
+    400002: Cube_004
+    400004: //RootNode
     2100000: unnamed
-    2300000: Back
-    2300002: Base
-    2300004: Down
-    2300006: Forward
-    2300008: Left
-    2300010: Right
-    2300012: Up
-    2300014: BackCup
-    2300016: DownCup
-    2300018: ForwardCup
-    2300020: LeftCup
-    2300022: RightCup
-    2300024: UpCup
-    3300000: Back
-    3300002: Base
-    3300004: Down
-    3300006: Forward
-    3300008: Left
-    3300010: Right
-    3300012: Up
-    3300014: BackCup
-    3300016: DownCup
-    3300018: ForwardCup
-    3300020: LeftCup
-    3300022: RightCup
-    3300024: UpCup
-    4300000: Forward
-    4300002: Down
-    4300004: Back
-    4300006: Left
-    4300008: Up
-    4300010: Right
-    4300012: Base
-    4300014: BackCup
-    4300016: ForwardCup
-    4300018: DownCup
-    4300020: RightCup
-    4300022: UpCup
-    4300024: LeftCup
+    2300000: Cube_000
+    2300002: Cube_004
+    3300000: Cube_000
+    3300002: Cube_004
+    4300000: Cube_000
+    4300002: Cube_004
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

@@ -5,8 +5,9 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
 	public GridLoc gridLoc;
-	public bool ss = false;
-	public bool active = false;
+	public bool locked = false;
+	public bool takesPower = false;
+	public bool transfersPower = false;
 
 	public virtual void Start()
 	{
@@ -15,13 +16,14 @@ public class Block : MonoBehaviour
 	}
 	public virtual void Action(GridLoc g)
 	{
-		active = true;
+		
 	}
 
 	public virtual void EndLastTick()
 	{
 		StopAllCoroutines();
 		transform.position = new GridLoc(transform.position).ToVector3();
+		gridLoc = new GridLoc(transform.position);
 		Vector3 rot = transform.eulerAngles;
 		rot.x = Mathf.Round(rot.x / 90f) * 90;
 		rot.y = Mathf.Round(rot.y / 90f) * 90;
