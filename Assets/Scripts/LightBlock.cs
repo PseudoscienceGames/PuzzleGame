@@ -6,21 +6,19 @@ public class LightBlock : Block
 {
 	public GameObject bulb;
 
-	public override void Start()
+	public void Start()
 	{
-		base.Start();
 		takesPower = true;
 		bulb = transform.Find("Point light").gameObject;
 	}
-
-	public override void EndLastTick()
+	public override void Activate()
 	{
-		base.EndLastTick();
-		bulb.SetActive(false);
-	}
-	public override void Action(GridLoc g)
-	{
-		base.Action(g);
+		base.Activate();
 		bulb.SetActive(true);
+	}
+	public override void EndTick()
+	{
+		base.EndTick();
+		bulb.SetActive(false);
 	}
 }
