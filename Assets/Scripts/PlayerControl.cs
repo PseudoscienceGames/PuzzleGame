@@ -6,7 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
 	public List<GameObject> availBlocks = new List<GameObject>();
 	public int selected;
-	public Vector3 loc;
+	public Vector3Int loc;
 	public float smoothTime;
 	private Vector3 velocity = Vector3.zero;
 
@@ -22,7 +22,7 @@ public class PlayerControl : MonoBehaviour
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 500))
 		{
 			pos = hit.point + (hit.normal * 0.5f);
-			loc = new GridLoc(transform.position).ToVector3();
+			loc = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
 			transform.position = Vector3.SmoothDamp(transform.position, loc, ref velocity, smoothTime);
 
 		}
