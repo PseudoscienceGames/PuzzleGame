@@ -8,4 +8,11 @@ public class BuildState : State
 	{
 		
 	}
+
+	public void Play()
+	{
+		GameObject.Find("Cursor").SetActive(false);
+		GameObject.Find("BuildUI").SetActive(false);
+		GetComponent<StateMachine>().ChangeState<PlayState>();
+	}
 }

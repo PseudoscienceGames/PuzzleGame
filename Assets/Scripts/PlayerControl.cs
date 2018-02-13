@@ -9,17 +9,20 @@ public class PlayerControl : MonoBehaviour
 	public Vector3Int loc;
 	public float smoothTime;
 	private Vector3 velocity = Vector3.zero;
+	private LayerMask ignoreSides;
 
 	void Start()
 	{
-		GetComponent<MeshFilter>().sharedMesh = availBlocks[selected].transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
+		GetComponent<MeshFilter>().sharedMesh = availBlocks[selected].GetComponent<Block>().mesh;
+		ignoreSides = LayerMask.NameToLayer("Sides");
 	}
 
 	void Update ()
 	{
 		RaycastHit hit;
 		Vector3 pos;
-		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 500))
+		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 500, ignoreSides))
+			Debug.Log(hit.transform.gameObject.layer);
 		{
 			pos = hit.point + (hit.normal * 0.5f);
 			loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
@@ -40,11 +43,12 @@ public class PlayerControl : MonoBehaviour
 				if (selected < 0)
 					selected = availBlocks.Count - 1;
 			}
-			GetComponent<MeshFilter>().sharedMesh = availBlocks[selected].GetComponent<MeshFilter>().sharedMesh;
+			GetComponent<MeshFilter>().sharedMesh = availBlocks[selected].GetComponent<Block>().mesh;
 		}
 		if(Input.GetMouseButtonDown(0))
 		{
-			Instantiate(availBlocks[selected], loc, transform.rotation);
+			GameObject b = Instantiate(availBlocks[selected], loc, transform.rotation) as GameObject;
+			BlockController.Instance.blocks.Add(b.GetComponent<Block>());
 		}
 	}
 
