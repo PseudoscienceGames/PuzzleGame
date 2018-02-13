@@ -12,7 +12,7 @@ public class PlayerControl : MonoBehaviour
 
 	void Start()
 	{
-		GetComponent<MeshFilter>().sharedMesh = availBlocks[selected].GetComponent<MeshFilter>().sharedMesh;
+		GetComponent<MeshFilter>().sharedMesh = availBlocks[selected].transform.GetChild(0).GetComponent<MeshFilter>().sharedMesh;
 	}
 
 	void Update ()
@@ -22,7 +22,7 @@ public class PlayerControl : MonoBehaviour
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 500))
 		{
 			pos = hit.point + (hit.normal * 0.5f);
-			loc = new Vector3Int(Mathf.RoundToInt(transform.position.x), Mathf.RoundToInt(transform.position.y), Mathf.RoundToInt(transform.position.z));
+			loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
 			transform.position = Vector3.SmoothDamp(transform.position, loc, ref velocity, smoothTime);
 
 		}
