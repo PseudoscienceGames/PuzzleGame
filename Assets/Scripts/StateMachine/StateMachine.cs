@@ -10,7 +10,6 @@ public class StateMachine : MonoBehaviour
 
 	public void ChangeState<T> () where T : State
 	{
-
 		if(state != null)
 			state.enabled = false;
 		T s = GetComponent<T>();
@@ -25,6 +24,6 @@ public class StateMachine : MonoBehaviour
 	private void Awake()
 	{
 		Instance = this;
-		ChangeState<LoadMainMenuState>();
+		ChangeState<BuildState>();
 	}
 }
