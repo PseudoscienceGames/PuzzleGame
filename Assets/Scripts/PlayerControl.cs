@@ -22,7 +22,6 @@ public class PlayerControl : MonoBehaviour
 		RaycastHit hit;
 		Vector3 pos;
 		if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 500, ignoreSides))
-			Debug.Log(hit.transform.gameObject.layer);
 		{
 			pos = hit.point + (hit.normal * 0.5f);
 			loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));

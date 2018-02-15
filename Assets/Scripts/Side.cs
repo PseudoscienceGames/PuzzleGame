@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class Side : MonoBehaviour
 {
-	public Type type;
+	public SideType type;
 	public Side adjacentSide;
 }
 
-public enum Type
+public enum SideType
 {
 	Base,
 	Power

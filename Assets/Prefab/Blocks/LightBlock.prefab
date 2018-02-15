@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  adjacentSide: 0
+  adjacentSide: {fileID: 0}
 --- !u!114 &114046186817252490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -503,7 +503,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  adjacentSide: 0
+  adjacentSide: {fileID: 0}
 --- !u!114 &114188592495941926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -515,8 +515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8732155a1aa3874282c4b88692fbcca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  adjacentSide: 0
+  type: 1
+  adjacentSide: {fileID: 0}
 --- !u!114 &114270220571439396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -531,6 +531,7 @@ MonoBehaviour:
   loc: {x: 0, y: 0, z: 0}
   mesh: {fileID: 4300002, guid: 9b2f400cc27ca404787d5e7b03a095d4, type: 3}
   sides: []
+  active: 0
 --- !u!114 &114574828530811420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -543,7 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  adjacentSide: 0
+  adjacentSide: {fileID: 0}
 --- !u!114 &114731372334656620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -556,7 +557,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  adjacentSide: 0
+  adjacentSide: {fileID: 0}
 --- !u!114 &114804305239374518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -569,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  adjacentSide: 0
+  adjacentSide: {fileID: 0}
 --- !u!135 &135345510964330844
 SphereCollider:
   m_ObjectHideFlags: 1

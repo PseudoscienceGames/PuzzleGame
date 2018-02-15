@@ -6,9 +6,14 @@ public class Block : MonoBehaviour
 {
 	public Vector3Int loc;
 	public Mesh mesh;
-	public List<Collider> c;
 
 	public List<Side> sides = new List<Side>();
+	public bool active;
+
+	public virtual void Activate()
+	{
+		Debug.Log(name);
+	}
 
 	public void CheckSides()
 	{
