@@ -11,12 +11,7 @@ public class BlockController : MonoBehaviour
 
 	public void Initialize()
 	{
-		foreach(Block b in blocks)
-		{
-			Vector3 pos = b.transform.position;
-			b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
-		}
-		Tick();
+		InvokeRepeating("Tick", 0, 1);
 	}
 
 	public void Tick()
@@ -24,7 +19,11 @@ public class BlockController : MonoBehaviour
 		List<Block> blocksToCheck = new List<Block>();
 		List<Block> checkedBlocks = new List<Block>();
 		List<Block> blocksToActivate = new List<Block>();
-
+		foreach (Block b in blocks)
+		{
+			Vector3 pos = b.transform.position;
+			b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+		}
 		foreach (Block b in blocks)
 		{
 			b.CheckSides();
@@ -34,7 +33,6 @@ public class BlockController : MonoBehaviour
 		while(blocksToCheck.Count > 0)
 		{
 			Block b = blocksToCheck[0];
-			Debug.Log(blocksToCheck.Count);
 			foreach (Side s in b.sides)
 			{
 				if(s.adjacentSide != null && s.type == s.adjacentSide.type && s.type != SideType.Base && !checkedBlocks.Contains(s.adjacentSide.transform.root.GetComponent<Block>()))
@@ -46,9 +44,12 @@ public class BlockController : MonoBehaviour
 			checkedBlocks.Add(b);
 			blocksToCheck.RemoveAt(0);
 		}
-		foreach(Block b in blocksToActivate)
+		foreach(Block b in blocks)
 		{
-			b.Activate();
+			if (blocksToActivate.Contains(b))
+				b.Activate();
+			else
+				b.Deactivate();
 		}
 	}
 }

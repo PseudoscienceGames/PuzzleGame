@@ -19,6 +19,13 @@ ModelImporter:
     100022: LeftCup
     100024: RightCup
     100026: UpCup
+    100028: Center
+    100030: PlugBack
+    100032: PlugDown
+    100034: PlugForward
+    100036: PlugLeft
+    100038: PlugRight
+    100040: PlugUp
     400000: Back
     400002: Base
     400004: Down
@@ -33,6 +40,13 @@ ModelImporter:
     400022: LeftCup
     400024: RightCup
     400026: UpCup
+    400028: Center
+    400030: PlugBack
+    400032: PlugDown
+    400034: PlugForward
+    400036: PlugLeft
+    400038: PlugRight
+    400040: PlugUp
     2100000: unnamed
     2300000: Back
     2300002: Base
@@ -47,6 +61,13 @@ ModelImporter:
     2300020: LeftCup
     2300022: RightCup
     2300024: UpCup
+    2300026: Center
+    2300028: PlugBack
+    2300030: PlugDown
+    2300032: PlugForward
+    2300034: PlugLeft
+    2300036: PlugRight
+    2300038: PlugUp
     3300000: Back
     3300002: Base
     3300004: Down
@@ -60,6 +81,13 @@ ModelImporter:
     3300020: LeftCup
     3300022: RightCup
     3300024: UpCup
+    3300026: Center
+    3300028: PlugBack
+    3300030: PlugDown
+    3300032: PlugForward
+    3300034: PlugLeft
+    3300036: PlugRight
+    3300038: PlugUp
     4300000: Forward
     4300002: Down
     4300004: Back
@@ -73,6 +101,13 @@ ModelImporter:
     4300020: RightCup
     4300022: UpCup
     4300024: LeftCup
+    4300026: PlugLeft
+    4300028: PlugRight
+    4300030: PlugUp
+    4300032: PlugBack
+    4300034: PlugForward
+    4300036: Center
+    4300038: PlugDown
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

@@ -15,6 +15,11 @@ public class Block : MonoBehaviour
 		Debug.Log(name);
 	}
 
+	public virtual void Deactivate()
+	{
+
+	}
+
 	public void CheckSides()
 	{
 		sides.Clear();
@@ -22,10 +27,13 @@ public class Block : MonoBehaviour
 		foreach(Side side in sides)
 		{
 			List<Collider> cols = new List<Collider>(Physics.OverlapSphere(side.transform.position, .2f, 1 << LayerMask.NameToLayer("Side")));
-			foreach(Collider col in cols)
+			side.adjacentSide = null;
+			foreach (Collider col in cols)
 			{
 				if (col.transform.root != transform)
+				{
 					side.adjacentSide = col.GetComponent<Side>();
+				}
 			}
 		}
 	}
