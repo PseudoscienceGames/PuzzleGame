@@ -12,6 +12,8 @@ public enum SideType
 {
 	Base,
 	Power,
-	Piston
+	Piston,
+	Axle,
+	Gear
 
 }

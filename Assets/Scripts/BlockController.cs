@@ -6,14 +6,15 @@ public class BlockController : MonoBehaviour
 {
 	public List<Block> blocks = new List<Block>();
 	public List<Block> blocksToActivate = new List<Block>();
-	public float tickTime;
+	public float time;
+	public float tickSpeed;
 
 	public static BlockController Instance;
 	private void Awake(){ Instance = this; }
 
 	public void Initialize()
 	{
-		Tick();
+		StartCoroutine(Tick());
 	}
 
 	IEnumerator Tick()
@@ -41,6 +42,10 @@ public class BlockController : MonoBehaviour
 				if(s.adjacentSide != null && s.type == s.adjacentSide.type && s.type != SideType.Base && !checkedBlocks.Contains(s.adjacentSide.transform.root.GetComponent<Block>()))
 				{
 					blocksToCheck.Add(s.adjacentSide.transform.root.GetComponent<Block>());
+					if (s.type == SideType.Gear)
+						s.adjacentSide.transform.root.GetComponent<Block>().dir = -s.transform.root.GetComponent<Block>().dir;
+					if (s.type == SideType.Axle)
+						s.adjacentSide.transform.root.GetComponent<Block>().dir = s.transform.root.GetComponent<Block>().dir;
 				}
 			}
 			blocksToActivate.Add(b);
@@ -48,10 +53,10 @@ public class BlockController : MonoBehaviour
 			blocksToCheck.RemoveAt(0);
 		}
 
-		float time = 0;
-		while(time >= 1)
+		time = 0;
+		while(time < 1)
 		{
-			time += Time.deltaTime;
+			time += Time.deltaTime * tickSpeed;
 			if (time > 1)
 				time = 1;
 			foreach(Block b in blocks)

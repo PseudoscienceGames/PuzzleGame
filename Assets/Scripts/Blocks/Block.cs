@@ -6,6 +6,7 @@ public class Block : MonoBehaviour
 {
 	public Vector3Int loc;
 	public Mesh mesh;
+	public int dir = 1;
 
 	public List<Side> sides = new List<Side>();
 	public bool active;
@@ -20,7 +21,7 @@ public class Block : MonoBehaviour
 
 	}
 
-	public void CheckSides()
+	public virtual void CheckSides()
 	{
 		sides.Clear();
 		sides = new List<Side>(transform.GetComponentsInChildren<Side>());
@@ -36,5 +37,10 @@ public class Block : MonoBehaviour
 				}
 			}
 		}
+	}
+
+	public void Move(Vector3 dir, float time)
+	{
+		transform.position = loc + (dir * time);
 	}
 }

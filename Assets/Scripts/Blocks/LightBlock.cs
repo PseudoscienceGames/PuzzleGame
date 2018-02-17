@@ -4,15 +4,24 @@ using UnityEngine;
 
 public class LightBlock : Block
 {
-	public Material on;
-	public Material off;
+	public bool lit;
 
 	public override void Activate(float time)
 	{
-		transform.Find("Light").GetComponent<Light>().intensity = time;
+		if (!lit)
+		{
+			transform.Find("Light").GetComponent<Light>().intensity = time;
+			if (time == 1)
+				lit = true;
+		}
 	}
 	public override void Deactivate(float time)
 	{
-		transform.Find("Light").GetComponent<Light>().intensity = 1 - time;
+		if (lit)
+		{
+			transform.Find("Light").GetComponent<Light>().intensity = 1 - time;
+			if (time == 1)
+				lit = false;
+		}
 	}
 }

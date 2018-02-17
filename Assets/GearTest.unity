@@ -260,7 +260,7 @@ Prefab:
     - target: {fileID: 114489353239655230, guid: 1c712a0133c2dd144b29be754ac925db,
         type: 2}
       propertyPath: availBlocks.Array.size
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4510716903920768, guid: 1c712a0133c2dd144b29be754ac925db, type: 2}
       propertyPath: m_LocalPosition.x
@@ -326,7 +326,19 @@ Prefab:
         type: 2}
       propertyPath: availBlocks.Array.data[4]
       value: 
-      objectReference: {fileID: 1829537961604454, guid: 7c84cb566205ec74a9a0a942c33fcea9,
+      objectReference: {fileID: 1483492012035906, guid: 5dac77b2e97284f4c8e8d21f8ba3b058,
+        type: 2}
+    - target: {fileID: 114489353239655230, guid: 1c712a0133c2dd144b29be754ac925db,
+        type: 2}
+      propertyPath: availBlocks.Array.data[5]
+      value: 
+      objectReference: {fileID: 1549098083618840, guid: 288f547142b702147a4239a2a917781f,
+        type: 2}
+    - target: {fileID: 114489353239655230, guid: 1c712a0133c2dd144b29be754ac925db,
+        type: 2}
+      propertyPath: availBlocks.Array.data[6]
+      value: 
+      objectReference: {fileID: 1378474556603646, guid: 31c258927c0d1cb44934dae8dc576801,
         type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c712a0133c2dd144b29be754ac925db, type: 2}
@@ -359,6 +371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocks: []
+  blocksToActivate: []
+  time: 0
+  tickSpeed: 1
 --- !u!4 &606527371
 Transform:
   m_ObjectHideFlags: 0
