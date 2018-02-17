@@ -5,24 +5,27 @@ using UnityEngine;
 public class BlockController : MonoBehaviour
 {
 	public List<Block> blocks = new List<Block>();
+	public List<Block> blocksToActivate = new List<Block>();
+	public float tickTime;
 
 	public static BlockController Instance;
 	private void Awake(){ Instance = this; }
 
 	public void Initialize()
 	{
-		InvokeRepeating("Tick", 0, 1);
+		Tick();
 	}
 
-	public void Tick()
+	IEnumerator Tick()
 	{
 		List<Block> blocksToCheck = new List<Block>();
 		List<Block> checkedBlocks = new List<Block>();
-		List<Block> blocksToActivate = new List<Block>();
+		blocksToActivate.Clear();
 		foreach (Block b in blocks)
 		{
 			Vector3 pos = b.transform.position;
 			b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+			b.transform.position = b.loc;
 		}
 		foreach (Block b in blocks)
 		{
@@ -44,12 +47,22 @@ public class BlockController : MonoBehaviour
 			checkedBlocks.Add(b);
 			blocksToCheck.RemoveAt(0);
 		}
-		foreach(Block b in blocks)
+
+		float time = 0;
+		while(time >= 1)
 		{
-			if (blocksToActivate.Contains(b))
-				b.Activate();
-			else
-				b.Deactivate();
+			time += Time.deltaTime;
+			if (time > 1)
+				time = 1;
+			foreach(Block b in blocks)
+			{
+				if (blocksToActivate.Contains(b))
+					b.Activate(time);
+				else
+					b.Deactivate(time);
+			}
+			yield return null;
 		}
+		yield return Tick();
 	}
 }

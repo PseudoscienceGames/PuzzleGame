@@ -10,12 +10,12 @@ public class Block : MonoBehaviour
 	public List<Side> sides = new List<Side>();
 	public bool active;
 
-	public virtual void Activate()
+	public virtual void Activate(float time)
 	{
-		Debug.Log(name);
+		
 	}
 
-	public virtual void Deactivate()
+	public virtual void Deactivate(float time)
 	{
 
 	}

@@ -638,7 +638,7 @@ PlayerSettings:
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled: {}
   facebookSdkVersion: 7.9.4
-  apiCompatibilityLevel: 2
+  apiCompatibilityLevel: 3
   cloudProjectId: 4022e4b4-49ac-46b8-b6d2-6a9909375d39
   projectName: PuzzleGame2
   organizationId: quade81

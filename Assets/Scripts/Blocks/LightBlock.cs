@@ -7,16 +7,12 @@ public class LightBlock : Block
 	public Material on;
 	public Material off;
 
-	public override void Activate()
+	public override void Activate(float time)
 	{
-		base.Activate();
-		transform.Find("Light").gameObject.SetActive(true);
-		transform.Find("Glass").GetComponent<MeshRenderer>().material = on;
+		transform.Find("Light").GetComponent<Light>().intensity = time;
 	}
-	public override void Deactivate()
+	public override void Deactivate(float time)
 	{
-		base.Deactivate();
-		transform.Find("Light").gameObject.SetActive(false);
-		transform.Find("Glass").GetComponent<MeshRenderer>().material = off;
+		transform.Find("Light").GetComponent<Light>().intensity = 1 - time;
 	}
 }

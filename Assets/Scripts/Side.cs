@@ -11,6 +11,7 @@ public class Side : MonoBehaviour
 public enum SideType
 {
 	Base,
-	Power
+	Power,
+	Piston
 
 }
