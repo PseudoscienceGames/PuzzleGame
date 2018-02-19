@@ -5,12 +5,22 @@ using UnityEngine;
 public class LightBlock : Block
 {
 	public bool lit;
+	public Light myLight;
+	public Material glassMat;
+
+	private void Awake()
+	{
+		glassMat = transform.Find("Glass").GetComponent<Renderer>().material;
+	}
 
 	public override void Activate(float time)
 	{
 		if (!lit)
 		{
-			transform.Find("Light").GetComponent<Light>().intensity = time;
+			myLight.intensity = time;
+			Color c = Color.white * time;
+			Debug.Log(c);
+			glassMat.SetColor("_EmissionColor", c);
 			if (time == 1)
 				lit = true;
 		}
@@ -19,7 +29,9 @@ public class LightBlock : Block
 	{
 		if (lit)
 		{
-			transform.Find("Light").GetComponent<Light>().intensity = 1 - time;
+			myLight.intensity = 1 - time;
+			Color c = Color.white;
+			glassMat.SetColor("_EmissionColor", c * (1 - time));
 			if (time == 1)
 				lit = false;
 		}

@@ -530,10 +530,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loc: {x: 0, y: 0, z: 0}
   mesh: {fileID: 4300006, guid: 9b2f400cc27ca404787d5e7b03a095d4, type: 3}
+  dir: 1
   sides: []
   active: 0
-  on: {fileID: 2100000, guid: 8743d5ab5a5e84f468c76244deeadb98, type: 2}
-  off: {fileID: 2100000, guid: ab7fce37996d49349be211859703980d, type: 2}
+  lit: 0
+  myLight: {fileID: 108514571784731942}
 --- !u!114 &114574828530811420
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -44,7 +44,31 @@ public class PlayerControl : MonoBehaviour
 			}
 			GetComponent<MeshFilter>().sharedMesh = availBlocks[selected].GetComponent<Block>().mesh;
 		}
-		if(Input.GetMouseButtonDown(0))
+		if(Input.GetButtonDown("PosX"))
+		{
+			transform.Rotate(90, 0, 0, Space.World);
+		}
+		if (Input.GetButtonDown("NegX"))
+		{
+			transform.Rotate(-90, 0, 0, Space.World);
+		}
+		if (Input.GetButtonDown("PosY"))
+		{
+			transform.Rotate(0, 90, 0, Space.World);
+		}
+		if (Input.GetButtonDown("NegY"))
+		{
+			transform.Rotate(0, -90, 0, Space.World);
+		}
+		if (Input.GetButtonDown("PosZ"))
+		{
+			transform.Rotate(0, 0, 90, Space.World);
+		}
+		if (Input.GetButtonDown("NegZ"))
+		{
+			transform.Rotate(0, 0, -90, Space.World);
+		}
+		if (Input.GetMouseButtonDown(0))
 		{
 			GameObject b = Instantiate(availBlocks[selected], loc, transform.rotation) as GameObject;
 			BlockController.Instance.blocks.Add(b.GetComponent<Block>());
