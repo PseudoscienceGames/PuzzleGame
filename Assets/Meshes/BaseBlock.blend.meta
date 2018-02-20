@@ -1,65 +1,21 @@
 fileFormatVersion: 2
-guid: 2dedb4bbfa70271448a2a0fa8a922107
-timeCreated: 1518993603
+guid: ba49114c06729014ca68442417e85f0e
+timeCreated: 1519145930
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
     100000: //RootNode
-    100002: Selector
-    100004: TranslateArrows
-    100006: XCCArrow
-    100008: XCWArrow
-    100010: YCCWArrow
-    100012: YCWArrow
-    100014: ZCCWArrow
-    100016: ZCWArrow
-    100018: TranslateCollider
     400000: //RootNode
-    400002: Selector
-    400004: TranslateArrows
-    400006: XCCArrow
-    400008: XCWArrow
-    400010: YCCWArrow
-    400012: YCWArrow
-    400014: ZCCWArrow
-    400016: ZCWArrow
-    400018: TranslateCollider
     2100000: unnamed
     2300000: //RootNode
-    2300002: Selector
-    2300004: TranslateArrows
-    2300006: XCCArrow
-    2300008: XCWArrow
-    2300010: YCCWArrow
-    2300012: YCWArrow
-    2300014: ZCCWArrow
-    2300016: ZCWArrow
-    2300018: TranslateCollider
     3300000: //RootNode
-    3300002: Selector
-    3300004: TranslateArrows
-    3300006: XCCArrow
-    3300008: XCWArrow
-    3300010: YCCWArrow
-    3300012: YCWArrow
-    3300014: ZCCWArrow
-    3300016: ZCWArrow
-    3300018: TranslateCollider
-    4300000: Selector
-    4300002: ZCCWArrow
-    4300004: XCCArrow
-    4300006: YCCWArrow
-    4300008: TranslateArrows
-    4300010: XCWArrow
-    4300012: ZCWArrow
-    4300014: YCWArrow
-    4300016: TranslateCollider
+    4300000: Block
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -112,7 +68,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -131,7 +87,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 0
+  animationType: 2
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
