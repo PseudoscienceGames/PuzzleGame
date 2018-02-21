@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: ba49114c06729014ca68442417e85f0e
-timeCreated: 1519145930
+guid: 92953372861451541b82df9ca3e3a074
+timeCreated: 1519253355
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -10,7 +10,7 @@ ModelImporter:
     2100000: unnamed
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Block
+    4300000: Die_Block
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

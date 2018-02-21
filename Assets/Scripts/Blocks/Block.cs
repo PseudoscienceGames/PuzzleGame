@@ -5,7 +5,6 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
 	public Vector3Int loc;
-	public Mesh mesh;
 	public int dir = 1;
 
 	public List<Side> sides = new List<Side>();

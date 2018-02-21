@@ -4,9 +4,30 @@ using UnityEngine;
 
 public class BuildState : State
 {
+	public LayerMask m;
+
 	public override void Activate()
 	{
 		
+	}
+
+	void Update()
+	{
+		if (Input.GetMouseButtonDown(0))
+		{
+			RaycastHit hit;
+			if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 500, m))
+			{
+				Selection.Instance.transform.position = hit.transform.position;
+				Selection.Instance.selected = hit.transform;
+				Selection.Instance.gameObject.SetActive(true);
+			}
+			else
+			{
+				Selection.Instance.selected = null;
+				Selection.Instance.gameObject.SetActive(false);
+			}
+		}
 	}
 
 	public void Play()

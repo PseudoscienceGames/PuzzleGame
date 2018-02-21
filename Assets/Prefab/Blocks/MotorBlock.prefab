@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4530268042836510}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   - component: {fileID: 4791425210849978}
   - component: {fileID: 65348471142609694}
   - component: {fileID: 114493975284763056}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MotorBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4586297863160056}
   - component: {fileID: 33621471472466296}
   - component: {fileID: 23718163984107452}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,7 +172,7 @@ GameObject:
   - component: {fileID: 4189083970454372}
   - component: {fileID: 33767737094102380}
   - component: {fileID: 23880419195918460}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Axle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loc: {x: 0, y: 0, z: 0}
-  mesh: {fileID: 4300000, guid: fa8fde7d4f76b134bb063e175f43e86f, type: 3}
+  dir: 1
   sides: []
   active: 0
   axle: {fileID: 4189083970454372}

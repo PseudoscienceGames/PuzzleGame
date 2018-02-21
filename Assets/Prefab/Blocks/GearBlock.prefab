@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4720662073457770}
   - component: {fileID: 33302545337700496}
   - component: {fileID: 23849050734534522}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gear
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 4204771780580862}
   - component: {fileID: 33619055706368512}
   - component: {fileID: 23851535357896066}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   - component: {fileID: 4022620491916048}
   - component: {fileID: 65068643206999780}
   - component: {fileID: 114605938542328762}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GearBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4578034269695216}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,11 +450,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loc: {x: 0, y: 0, z: 0}
-  mesh: {fileID: 4300002, guid: 62c530ba181eb844998739c508c22f77, type: 3}
+  dir: 1
   sides: []
   active: 0
   gear: {fileID: 4720662073457770}
-  dir: 1
 --- !u!114 &114615051080213818
 MonoBehaviour:
   m_ObjectHideFlags: 1

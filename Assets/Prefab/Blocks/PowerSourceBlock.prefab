@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4413384294139580}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 4611841081499430}
   - component: {fileID: 65782815134593120}
   - component: {fileID: 114498219428511518}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PowerSourceBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -139,7 +139,7 @@ GameObject:
   - component: {fileID: 33430948664062826}
   - component: {fileID: 23137047916783908}
   - component: {fileID: 95031622355302462}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loc: {x: 0, y: 0, z: 0}
-  mesh: {fileID: 4300000, guid: 56cf5d15c402ff7479d83a8062d9fd48, type: 3}
+  dir: 1
   sides: []
   active: 0
 --- !u!114 &114533208911588686

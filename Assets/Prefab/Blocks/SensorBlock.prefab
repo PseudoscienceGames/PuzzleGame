@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4340115240663278}
   - component: {fileID: 65899964575272000}
   - component: {fileID: 114886404533400158}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: SensorBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -70,7 +70,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4982557307087256}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 4560067972208860}
   - component: {fileID: 33297098911791980}
   - component: {fileID: 23574940880561752}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loc: {x: 0, y: 0, z: 0}
-  mesh: {fileID: 4300000, guid: a2bb6b0dcb89e9741916723e3662a365, type: 3}
+  dir: 1
   sides: []
   active: 0
 --- !u!135 &135184727738229024

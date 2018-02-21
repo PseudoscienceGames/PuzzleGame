@@ -15,6 +15,7 @@ ModelImporter:
     100014: ZCCWArrow
     100016: ZCWArrow
     100018: TranslateCollider
+    100020: XCCWArrow
     400000: //RootNode
     400002: Selector
     400004: TranslateArrows
@@ -25,6 +26,7 @@ ModelImporter:
     400014: ZCCWArrow
     400016: ZCWArrow
     400018: TranslateCollider
+    400020: XCCWArrow
     2100000: unnamed
     2300000: //RootNode
     2300002: Selector
@@ -36,6 +38,7 @@ ModelImporter:
     2300014: ZCCWArrow
     2300016: ZCWArrow
     2300018: TranslateCollider
+    2300020: XCCWArrow
     3300000: //RootNode
     3300002: Selector
     3300004: TranslateArrows
@@ -46,6 +49,7 @@ ModelImporter:
     3300014: ZCCWArrow
     3300016: ZCWArrow
     3300018: TranslateCollider
+    3300020: XCCWArrow
     4300000: Selector
     4300002: ZCCWArrow
     4300004: XCCArrow
@@ -55,6 +59,7 @@ ModelImporter:
     4300012: ZCWArrow
     4300014: YCWArrow
     4300016: TranslateCollider
+    4300018: XCCWArrow
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}

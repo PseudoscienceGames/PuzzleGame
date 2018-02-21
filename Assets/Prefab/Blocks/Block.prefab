@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4454996473307250}
   - component: {fileID: 33223288017221810}
   - component: {fileID: 23178872440978060}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4755164161859708}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 4465573448671804}
   - component: {fileID: 65924013338710234}
   - component: {fileID: 114997431799567104}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Block
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +327,7 @@ MeshFilter:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1052691690620232}
-  m_Mesh: {fileID: 4300000, guid: 2bef395594c005c429f325459e1329d4, type: 3}
+  m_Mesh: {fileID: 4300000, guid: ba49114c06729014ca68442417e85f0e, type: 3}
 --- !u!65 &65924013338710234
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -430,7 +430,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loc: {x: 0, y: 0, z: 0}
-  mesh: {fileID: 0}
+  dir: 1
   sides: []
   active: 0
 --- !u!135 &135151312688437356

@@ -38,7 +38,7 @@ GameObject:
   - component: {fileID: 4549840863764594}
   - component: {fileID: 33740750093890746}
   - component: {fileID: 23248691983838876}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 4499336913211874}
   - component: {fileID: 33212344640607844}
   - component: {fileID: 23829316334798722}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlugRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 4309369434346100}
   - component: {fileID: 33803428530553560}
   - component: {fileID: 23963464762847482}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlugForward
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 4546809631765622}
   - component: {fileID: 33225107591862900}
   - component: {fileID: 23809303043778502}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlugLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -157,7 +157,7 @@ GameObject:
   - component: {fileID: 4812935502765816}
   - component: {fileID: 33945462805511590}
   - component: {fileID: 23267118386051630}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlugUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4470678474289354}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 4657931658311270}
   - component: {fileID: 65572051259745046}
   - component: {fileID: 114597335507375980}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: WireBlock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -240,7 +240,7 @@ GameObject:
   - component: {fileID: 4038926907313140}
   - component: {fileID: 33150344462555572}
   - component: {fileID: 23266771425194940}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlugBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -255,7 +255,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4354674096611154}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sides
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   - component: {fileID: 4734058978194560}
   - component: {fileID: 33946931927574354}
   - component: {fileID: 23772755378340116}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: PlugDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -852,7 +852,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loc: {x: 0, y: 0, z: 0}
-  mesh: {fileID: 4300036, guid: 224fd7a10c945e949b27f6ec10487de5, type: 3}
+  dir: 1
   sides: []
   active: 0
 --- !u!114 &114620311049280708
