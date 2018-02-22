@@ -20,7 +20,7 @@ public class BlockGrabbedState : State
 	{
 		if (Input.GetMouseButtonUp(0))
 		{
-			StateMachine.Instance.ChangeState<BuildState>();
+			StateMachine.Instance.ChangeState<SelectionState>();
 			Selection.Instance.selected.gameObject.layer = 11;
 			foreach (Transform t in Selection.Instance.GetComponentInChildren<Transform>())
 			{

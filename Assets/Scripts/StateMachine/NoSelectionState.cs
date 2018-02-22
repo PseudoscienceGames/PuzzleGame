@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuildState : State
+public class NoSelectionState : State
 {
 	public LayerMask m;
 
 	public override void Activate()
 	{
-		
+		Selection.Instance.gameObject.SetActive(false);
+
 	}
 
 	void Update()
@@ -22,6 +23,7 @@ public class BuildState : State
 				Selection.Instance.selected = hit.transform;
 				Selection.Instance.gameObject.SetActive(true);
 				CameraControl.Instance.FocusCam(hit.transform.position);
+				GetComponent<StateMachine>().ChangeState<SelectionState>();
 			}
 			else
 			{
@@ -29,12 +31,5 @@ public class BuildState : State
 				Selection.Instance.gameObject.SetActive(false);
 			}
 		}
-	}
-
-	public void Play()
-	{
-		GameObject.Find("Cursor").SetActive(false);
-		GameObject.Find("BuildUI").SetActive(false);
-		GetComponent<StateMachine>().ChangeState<PlayState>();
 	}
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
 	public static StateMachine Instance;
+	private State lastState;
 
 	public State state;
 
@@ -19,11 +20,26 @@ public class StateMachine : MonoBehaviour
 			s.enabled = true;
 		state = s;
 		state.Activate();
+		Debug.Log(state);
 	}
 
 	private void Awake()
 	{
 		Instance = this;
-		ChangeState<BuildState>();
+		ChangeState<NoSelectionState>();
 	}
+
+	public void ChangeToAddBlockState()
+	{
+		lastState = state;
+		ChangeState<AddBlockState>();
+	}
+
+	public void ChangeFromAddBlockState()
+	{
+		state.enabled = false;
+		state = lastState;
+		state.enabled = true;
+	}
+
 }

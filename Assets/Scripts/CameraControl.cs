@@ -56,7 +56,7 @@ public class CameraControl : MonoBehaviour
 		{
 			//Zoom camera
 			zoom = -Camera.main.transform.localPosition.z;
-			if (zoom > zoomMin && zoom < zoomMax)
+			if (zoom >= zoomMin && zoom <= zoomMax && StateMachine.Instance.state != StateMachine.Instance.GetComponent<AddBlockState>())
 			{
 				if (Camera.main.orthographic)
 					Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
@@ -91,5 +91,20 @@ public class CameraControl : MonoBehaviour
 				transform.position = Vector3.SmoothDamp(transform.position, targetPosition, ref velocity, smoothTime);
 			}
 		}
+	}
+
+	public void FocusCam(Vector3 pos)
+	{
+		StartCoroutine(Focus(pos));
+	}
+
+	IEnumerator Focus(Vector3 pos)
+	{
+		while (Vector3.Distance(transform.position, pos) > 0.01f)
+		{
+			transform.position = Vector3.SmoothDamp(transform.position, pos, ref velocity, smoothTime);
+			yield return null;
+		}
+		yield return null;
 	}
 }
