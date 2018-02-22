@@ -30,7 +30,7 @@ public class AddBlockPanel : MonoBehaviour
 		while (t <= 1)
 		{
 			t += Time.deltaTime * 4f;
-			GetComponent<RectTransform>().anchoredPosition = new Vector2((1 - t) * 138.48f, GetComponent<RectTransform>().anchoredPosition.y);
+			GetComponent<RectTransform>().anchoredPosition = new Vector2(Mathf.Lerp(0, 138.48f, 1 - t), GetComponent<RectTransform>().anchoredPosition.y);
 			yield return null;
 		}
 		yield return null;
@@ -41,7 +41,7 @@ public class AddBlockPanel : MonoBehaviour
 		while (t <= 1)
 		{
 			t += Time.deltaTime * 4f;
-			GetComponent<RectTransform>().anchoredPosition = new Vector2(t * 138.48f, GetComponent<RectTransform>().anchoredPosition.y);
+			GetComponent<RectTransform>().anchoredPosition = new Vector2(Mathf.Lerp(0, 138.48f, t), GetComponent<RectTransform>().anchoredPosition.y);
 			yield return null;
 		}
 		yield return null;
