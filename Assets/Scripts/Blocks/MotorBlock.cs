@@ -8,7 +8,6 @@ public class MotorBlock : Block
 
 	public override void Activate(float time)
 	{
-		Vector3 rot = new Vector3(axle.eulerAngles.x, 90f * time, axle.eulerAngles.z);
-		axle.eulerAngles = rot;
+		axle.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.up * 90 * dir) * transform.rotation, time);
 	}
 }

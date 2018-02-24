@@ -18,7 +18,7 @@ public class BlockGrabbedState : State
 
 	public void Update()
 	{
-		if (Input.GetMouseButtonUp(0))
+		if (Input.GetMouseButtonDown(0))
 		{
 			StateMachine.Instance.ChangeState<SelectionState>();
 			Selection.Instance.selected.gameObject.layer = 11;

@@ -8,7 +8,6 @@ public class GearBlock : Block
 
 	public override void Activate(float time)
 	{
-		Vector3 rot = new Vector3(gear.eulerAngles.x, 90f * time * dir, gear.eulerAngles.z);
-		gear.eulerAngles = rot;
+		gear.transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(transform.up * 90 * dir) * transform.rotation, time);
 	}
 }

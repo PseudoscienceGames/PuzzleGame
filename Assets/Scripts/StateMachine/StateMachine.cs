@@ -5,7 +5,7 @@ using UnityEngine;
 public class StateMachine : MonoBehaviour
 {
 	public static StateMachine Instance;
-	private State lastState;
+	public State lastState;
 
 	public State state;
 
@@ -37,9 +37,12 @@ public class StateMachine : MonoBehaviour
 
 	public void ChangeFromAddBlockState()
 	{
-		state.enabled = false;
-		state = lastState;
-		state.enabled = true;
+		if (state.GetType() != typeof(BlockGrabbedState))
+		{
+			state.enabled = false;
+			state = lastState;
+			state.enabled = true;
+		}
 	}
 
 }

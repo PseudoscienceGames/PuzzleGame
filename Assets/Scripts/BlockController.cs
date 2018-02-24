@@ -14,11 +14,16 @@ public class BlockController : MonoBehaviour
 
 	public void Initialize()
 	{
+		foreach(Block b in GameObject.FindObjectsOfType<Block>())
+		{
+			blocks.Add(b);
+		}
 		StartCoroutine(Tick());
 	}
 
 	IEnumerator Tick()
 	{
+		Debug.Log("Tick");
 		List<Block> blocksToCheck = new List<Block>();
 		List<Block> checkedBlocks = new List<Block>();
 		blocksToActivate.Clear();
@@ -45,7 +50,12 @@ public class BlockController : MonoBehaviour
 					if (s.type == SideType.Gear)
 						s.adjacentSide.transform.root.GetComponent<Block>().dir = -s.transform.root.GetComponent<Block>().dir;
 					if (s.type == SideType.Axle)
-						s.adjacentSide.transform.root.GetComponent<Block>().dir = s.transform.root.GetComponent<Block>().dir;
+					{
+						if(s.transform.root.rotation == s.adjacentSide.transform.root.rotation)
+							s.adjacentSide.transform.root.GetComponent<Block>().dir = s.transform.root.GetComponent<Block>().dir;
+						else
+							s.adjacentSide.transform.root.GetComponent<Block>().dir = -s.transform.root.GetComponent<Block>().dir;
+					}
 				}
 			}
 			blocksToActivate.Add(b);

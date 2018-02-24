@@ -13,7 +13,7 @@ public class SelectionState : State
 		if (Physics.Raycast(ray, out hit, 200, 1 << LayerMask.NameToLayer("TransformTool")))
 		{
 			Selection.Instance.Highlight(hit.transform.GetComponent<MeshRenderer>());
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonUp(0))
 			{
 				if (hit.transform.gameObject.name == "TranslateArrows")
 				{
