@@ -23,7 +23,6 @@ public class BlockController : MonoBehaviour
 
 	IEnumerator Tick()
 	{
-		Debug.Log("Tick");
 		List<Block> blocksToCheck = new List<Block>();
 		List<Block> checkedBlocks = new List<Block>();
 		blocksToActivate.Clear();
@@ -46,10 +45,16 @@ public class BlockController : MonoBehaviour
 			{
 				if(s.adjacentSide != null && s.type == s.adjacentSide.type && s.type != SideType.Base && !checkedBlocks.Contains(s.adjacentSide.transform.root.GetComponent<Block>()))
 				{
-					blocksToCheck.Add(s.adjacentSide.transform.root.GetComponent<Block>());
+					if(s.type != SideType.Gear || s.transform.root.up == s.adjacentSide.transform.root.up || s.transform.root.up == -s.adjacentSide.transform.root.up)
+						blocksToCheck.Add(s.adjacentSide.transform.root.GetComponent<Block>());
 					if (s.type == SideType.Gear)
-						s.adjacentSide.transform.root.GetComponent<Block>().dir = -s.transform.root.GetComponent<Block>().dir;
-					if (s.type == SideType.Axle)
+					{
+						if (s.transform.root.up == -s.adjacentSide.transform.root.up)
+							s.adjacentSide.transform.root.GetComponent<Block>().dir = s.transform.root.GetComponent<Block>().dir;
+						else
+							s.adjacentSide.transform.root.GetComponent<Block>().dir = -s.transform.root.GetComponent<Block>().dir;
+					}
+						if (s.type == SideType.Axle)
 					{
 						if(s.transform.root.rotation == s.adjacentSide.transform.root.rotation)
 							s.adjacentSide.transform.root.GetComponent<Block>().dir = s.transform.root.GetComponent<Block>().dir;
