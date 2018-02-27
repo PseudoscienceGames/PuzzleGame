@@ -19,7 +19,6 @@ public class LightBlock : Block
 		{
 			myLight.intensity = time;
 			Color c = Color.white * time;
-			Debug.Log(c);
 			glassMat.SetColor("_EmissionColor", c);
 			if (time == 1)
 				lit = true;
