@@ -56,7 +56,7 @@ public class CameraControl : MonoBehaviour
 		{
 			//Zoom camera
 			zoom = -Camera.main.transform.localPosition.z;
-			if (zoom >= zoomMin && zoom <= zoomMax && StateMachine.Instance.state != StateMachine.Instance.GetComponent<AddBlockState>())
+			if (zoom >= zoomMin && zoom <= zoomMax)
 			{
 				if (Camera.main.orthographic)
 					Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
