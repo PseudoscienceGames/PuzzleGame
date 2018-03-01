@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class BlockAddButton : MonoBehaviour
 {
-	//public GameObject block;
+	public GameObject block;
 
-	//public void AddBlock()
-	//{
-	//	Transform b = (Instantiate(block) as GameObject).transform;
-	//	BlockController.Instance.blocks.Add(b.GetComponent<Block>());
-	//	Selection.Instance.transform.position = b.transform.position;
-	//	Selection.Instance.gameObject.SetActive(true);
-	//	Selection.Instance.selected = b;
-	//	Selection.Instance.selected.gameObject.layer = 2;
-	//	StateMachine.Instance.ChangeState<BlockGrabbedState>();
-	//}
+	public void AddBlock()
+	{
+		Transform b = (Instantiate(block) as GameObject).transform;
+		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast(ray, out hit, 200, BuildController.Instance.blockAndSurface))
+		{
+			Vector3 pos = hit.point + (hit.normal * 0.5f);
+			pos = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+			b.position = pos;
+		}
+		else
+		{
+			Vector3 pos = Camera.main.ScreenToWorldPoint(Vector3.forward * 10 + Input.mousePosition);
+			pos = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+			b.position = pos;
+		}
+	}
 }

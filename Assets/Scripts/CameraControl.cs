@@ -100,6 +100,7 @@ public class CameraControl : MonoBehaviour
 
 	IEnumerator Focus(Vector3 pos)
 	{
+		pos.y = 0;
 		while (Vector3.Distance(transform.position, pos) > 0.01f)
 		{
 			transform.position = Vector3.SmoothDamp(transform.position, pos, ref velocity, smoothTime);

@@ -18,6 +18,12 @@ ModelImporter:
     100020: Col_003
     100022: Col_004
     100024: Col_005
+    100026: XCCW
+    100028: XCW
+    100030: YCCW
+    100032: YCW
+    100034: ZCCW
+    100036: ZCW
     400000: //RootNode
     400002: XCCWArrow
     400004: XCWArrow
@@ -31,6 +37,12 @@ ModelImporter:
     400020: Col_003
     400022: Col_004
     400024: Col_005
+    400026: XCCW
+    400028: XCW
+    400030: YCCW
+    400032: YCW
+    400034: ZCCW
+    400036: ZCW
     2100000: unnamed
     2300000: XCCWArrow
     2300002: XCWArrow
@@ -44,6 +56,12 @@ ModelImporter:
     2300018: Col_003
     2300020: Col_004
     2300022: Col_005
+    2300024: XCCW
+    2300026: XCW
+    2300028: YCCW
+    2300030: YCW
+    2300032: ZCCW
+    2300034: ZCW
     3300000: XCCWArrow
     3300002: XCWArrow
     3300004: YCCWArrow
@@ -56,6 +74,12 @@ ModelImporter:
     3300018: Col_003
     3300020: Col_004
     3300022: Col_005
+    3300024: XCCW
+    3300026: XCW
+    3300028: YCCW
+    3300030: YCW
+    3300032: ZCCW
+    3300034: ZCW
     4300000: ZCCWArrow
     4300002: XCCWArrow
     4300004: YCCWArrow
@@ -68,11 +92,17 @@ ModelImporter:
     4300018: Col_003
     4300020: Col_002
     4300022: Col_001
+    4300024: YCW
+    4300026: ZCW
+    4300028: XCCW
+    4300030: ZCCW
+    4300032: XCW
+    4300034: YCCW
     7400000: Default Take
     9500000: //RootNode
   externalObjects: {}
   materials:
-    importMaterials: 1
+    importMaterials: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -125,7 +155,7 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -144,7 +174,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 

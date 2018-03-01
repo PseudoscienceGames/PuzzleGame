@@ -20,29 +20,11 @@ public class StateMachine : MonoBehaviour
 			s.enabled = true;
 		state = s;
 		state.Activate();
-		Debug.Log(state);
 	}
 
 	private void Awake()
 	{
 		Instance = this;
-		ChangeState<NoSelectionState>();
+		ChangeState<BuildState>();
 	}
-
-	public void ChangeToAddBlockState()
-	{
-		lastState = state;
-		ChangeState<AddBlockState>();
-	}
-
-	public void ChangeFromAddBlockState()
-	{
-		if (state.GetType() != typeof(BlockGrabbedState))
-		{
-			state.enabled = false;
-			state = lastState;
-			state.enabled = true;
-		}
-	}
-
 }
