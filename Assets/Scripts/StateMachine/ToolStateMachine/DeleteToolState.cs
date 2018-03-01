@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class DeleteToolState : ToolState
 {
-
+	private void Update()
+	{
+		
+	}
 }

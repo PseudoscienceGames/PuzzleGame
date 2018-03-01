@@ -27,4 +27,20 @@ public class ToolStateMachine : MonoBehaviour
 		Instance = this;
 		ChangeState<SelectionToolState>();
 	}
+
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.X))
+		{
+			ChangeState<SelectionToolState>();
+		}
+		if (Input.GetKeyDown(KeyCode.C))
+		{
+			ChangeState<RotateToolState>();
+		}
+		if (Input.GetKeyDown(KeyCode.V))
+		{
+			ChangeState<TranslateToolState>();
+		}
+	}
 }

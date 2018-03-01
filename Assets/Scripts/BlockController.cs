@@ -21,6 +21,12 @@ public class BlockController : MonoBehaviour
 		StartCoroutine(Tick());
 	}
 
+	public void DeleteBlock(Block b)
+	{
+		blocks.Remove(b);
+		DestroyImmediate(b.gameObject);
+	}
+
 	IEnumerator Tick()
 	{
 		List<Block> blocksToCheck = new List<Block>();

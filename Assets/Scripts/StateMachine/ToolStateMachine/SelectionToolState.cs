@@ -11,6 +11,14 @@ public class SelectionToolState : ToolState
 
 	private void Update()
 	{
+		if(Input.GetKeyDown(KeyCode.Delete))
+		{
+			foreach(Block b in selected)
+			{
+				BlockController.Instance.DeleteBlock(b);
+			}
+			ClearSelected();
+		}
 		if (Input.GetMouseButtonDown(0))
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -54,5 +62,10 @@ public class SelectionToolState : ToolState
 	void ClearSelected()
 	{
 		selected.Clear();
+		foreach(KeyValuePair<Block, GameObject> kvp in selectedMarkers)
+		{
+			DestroyImmediate(kvp.Value);
+		}
+		selectedMarkers.Clear();
 	}
 }

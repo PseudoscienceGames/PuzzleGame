@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b391bdaefaf6a93428334fd75b077a48, type: 2}
+  - {fileID: 2100000, guid: 1a23dc43833678242b623ea4f3cb6b84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -349,7 +349,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b391bdaefaf6a93428334fd75b077a48, type: 2}
+  - {fileID: 2100000, guid: 1a23dc43833678242b623ea4f3cb6b84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -601,7 +601,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f4411c7362d34ea34925014e72500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1431223742071330, guid: ff825a04cbf602d4d9f3668115149803, type: 2}
 --- !u!114 &382780289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,7 +766,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f4411c7362d34ea34925014e72500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1609964343311688, guid: 5255b737b21ea0544a39f7859f338500, type: 2}
 --- !u!114 &395545472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -900,9 +898,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 473274171}
+  - component: {fileID: 473274172}
   - component: {fileID: 473274170}
   - component: {fileID: 473274169}
-  - component: {fileID: 473274168}
   - component: {fileID: 473274167}
   m_Layer: 0
   m_Name: ToolController
@@ -922,24 +920,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 139989ca311db0145a8dbd39fb090c93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &473274168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 473274166}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6379090b411dfcb4d99d0a4b43f7ff4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &473274169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 473274166}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37cde6354c9b88943906258aa805153c, type: 3}
   m_Name: 
@@ -950,7 +937,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 473274166}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c259d32bf7a81c49b34cfa7d9decf1a, type: 3}
   m_Name: 
@@ -977,6 +964,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &473274172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 473274166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 519ea9a65eab5d84bbccdbcca7123041, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastState: {fileID: 0}
+  state: {fileID: 0}
 --- !u!1 &515712413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1186,7 +1186,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f4411c7362d34ea34925014e72500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1483492012035906, guid: 5dac77b2e97284f4c8e8d21f8ba3b058, type: 2}
 --- !u!114 &605876350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1535,7 +1534,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f4411c7362d34ea34925014e72500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1750517536962252, guid: b79080e5763787241b80d941a06dbd52, type: 2}
 --- !u!114 &697247391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1608,7 +1606,7 @@ Prefab:
     - target: {fileID: 2300000, guid: e7342113c084c1f4a855ca82268775af, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b391bdaefaf6a93428334fd75b077a48, type: 2}
+      objectReference: {fileID: 2100000, guid: 1a23dc43833678242b623ea4f3cb6b84, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e7342113c084c1f4a855ca82268775af, type: 3}
   m_IsPrefabParent: 0
@@ -1734,7 +1732,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b391bdaefaf6a93428334fd75b077a48, type: 2}
+  - {fileID: 2100000, guid: 1a23dc43833678242b623ea4f3cb6b84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2022,7 +2020,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b391bdaefaf6a93428334fd75b077a48, type: 2}
+  - {fileID: 2100000, guid: 1a23dc43833678242b623ea4f3cb6b84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2671,7 +2669,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f4411c7362d34ea34925014e72500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1549098083618840, guid: 288f547142b702147a4239a2a917781f, type: 2}
 --- !u!114 &1518505045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2911,7 +2908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f4411c7362d34ea34925014e72500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1740391624970410, guid: 4d0f491fc5ed9e749938be62fee2f6cb, type: 2}
 --- !u!114 &1637569168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3076,7 +3072,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b391bdaefaf6a93428334fd75b077a48, type: 2}
+  - {fileID: 2100000, guid: 1a23dc43833678242b623ea4f3cb6b84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3239,7 +3235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f4411c7362d34ea34925014e72500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1378474556603646, guid: 31c258927c0d1cb44934dae8dc576801, type: 2}
 --- !u!114 &1744160378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3405,7 +3400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f4411c7362d34ea34925014e72500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1783178700813326, guid: 4779a346e1dc0a34caf6b806dace2350, type: 2}
 --- !u!114 &1777517939
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3694,7 +3688,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: b391bdaefaf6a93428334fd75b077a48, type: 2}
+  - {fileID: 2100000, guid: 1a23dc43833678242b623ea4f3cb6b84, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4023,7 +4017,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 091f4411c7362d34ea34925014e72500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  block: {fileID: 1134730213881034, guid: a5c94c7e3d9a7f34290fb4c06e82bf66, type: 2}
 --- !u!114 &2086081696
 MonoBehaviour:
   m_ObjectHideFlags: 0
