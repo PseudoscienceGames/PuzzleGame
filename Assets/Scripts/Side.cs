@@ -14,6 +14,7 @@ public enum SideType
 	Power,
 	Piston,
 	Axle,
-	Gear
+	Gear,
+	Conveyor
 
 }

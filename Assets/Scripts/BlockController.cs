@@ -6,6 +6,7 @@ public class BlockController : MonoBehaviour
 {
 	public List<Block> blocks = new List<Block>();
 	public List<Block> blocksToActivate = new List<Block>();
+	public List<Block> blocksToFall = new List<Block>();
 	public float time;
 	public float tickSpeed;
 
@@ -32,6 +33,7 @@ public class BlockController : MonoBehaviour
 		List<Block> blocksToCheck = new List<Block>();
 		List<Block> checkedBlocks = new List<Block>();
 		blocksToActivate.Clear();
+		blocksToFall.Clear();
 		foreach (Block b in blocks)
 		{
 			Vector3 pos = b.transform.position;
@@ -43,6 +45,8 @@ public class BlockController : MonoBehaviour
 			b.CheckSides();
 			if (b.GetComponent<PowerSourceBlock>() != null)
 				blocksToCheck.Add(b);
+			if (b.DirToSide(-Vector3.up).adjacentSide == null && b.loc.y > 0)
+				blocksToFall.Add(b);
 		}
 		while(blocksToCheck.Count > 0)
 		{
@@ -86,6 +90,8 @@ public class BlockController : MonoBehaviour
 					b.Activate(time);
 				else
 					b.Deactivate(time);
+				if (blocksToFall.Contains(b))
+					b.Move(Vector3.down, time);
 			}
 			yield return null;
 		}

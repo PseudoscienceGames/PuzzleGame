@@ -48,14 +48,12 @@ public class BuildController : MonoBehaviour
 
 	public IEnumerator MouseDown()
 	{
-		Debug.Log("Started");
 		Vector2 initMousePos = Input.mousePosition;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, 200, blockOnly))
 		{
 			selectedBlock = hit.transform;
-			Debug.Log(selectedBlock.name);
 			selectedBlock.transform.GetComponent<BoxCollider>().enabled = false;
 			rotTool.SetActive(false);
 		}
@@ -67,7 +65,6 @@ public class BuildController : MonoBehaviour
 		Vector3 initPos = selectedBlock.transform.position;
 		while (!Input.GetMouseButtonUp(0))
 		{
-			Debug.Log(selectedBlock.name);
 			if (Vector2.Distance(Input.mousePosition, initMousePos) > 10)
 			{
 				ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -78,7 +75,6 @@ public class BuildController : MonoBehaviour
 					selectedBlock.position = pos;
 				}
 			}
-			Debug.Log(selectedBlock.name);
 			yield return null;
 		}
 		if (initPos == selectedBlock.transform.position)
