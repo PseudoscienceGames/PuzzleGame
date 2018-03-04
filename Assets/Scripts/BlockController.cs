@@ -7,19 +7,41 @@ public class BlockController : MonoBehaviour
 	public List<Block> blocks = new List<Block>();
 	public List<Block> blocksToActivate = new List<Block>();
 	public List<Block> blocksToFall = new List<Block>();
+	public Dictionary<Block, Vector3> initLocs = new Dictionary<Block, Vector3>();
 	public float time;
 	public float tickSpeed;
+	public GameObject buildMenu;
+	public GameObject playMenu;
 
 	public static BlockController Instance;
 	private void Awake(){ Instance = this; }
 
 	public void Initialize()
 	{
+		buildMenu.SetActive(false);
+		playMenu.SetActive(true);
+		blocks.Clear();
+		initLocs.Clear();
 		foreach(Block b in GameObject.FindObjectsOfType<Block>())
 		{
 			blocks.Add(b);
+			Vector3 pos = b.transform.position;
+			b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+			b.transform.position = b.loc;
+			initLocs.Add(b, b.loc);
 		}
 		StartCoroutine(Tick());
+	}
+
+	public void Stop()
+	{
+		StopAllCoroutines();
+		buildMenu.SetActive(true);
+		playMenu.SetActive(false);
+		foreach(Block b in initLocs.Keys)
+		{
+			b.transform.position = initLocs[b];
+		}
 	}
 
 	public void DeleteBlock(Block b)
