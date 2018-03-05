@@ -7,7 +7,7 @@ public class BlockController : MonoBehaviour
 	public List<Block> blocks = new List<Block>();
 	public List<Block> blocksToActivate = new List<Block>();
 	public List<Block> blocksToFall = new List<Block>();
-	public Dictionary<Block, Vector3> initLocs = new Dictionary<Block, Vector3>();
+	public Dictionary<Block, TempTransform> initLocs = new Dictionary<Block, TempTransform>();
 	public float time;
 	public float tickSpeed;
 	public GameObject buildMenu;
@@ -28,7 +28,7 @@ public class BlockController : MonoBehaviour
 			Vector3 pos = b.transform.position;
 			b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
 			b.transform.position = b.loc;
-			initLocs.Add(b, b.loc);
+			initLocs.Add(b, new TempTransform(b.transform.root.position, b.transform.root.rotation));
 		}
 		StartCoroutine(Tick());
 	}
@@ -40,7 +40,9 @@ public class BlockController : MonoBehaviour
 		playMenu.SetActive(false);
 		foreach(Block b in initLocs.Keys)
 		{
-			b.transform.position = initLocs[b];
+			b.Deactivate(1);
+			b.transform.position = initLocs[b].pos;
+			b.transform.rotation = initLocs[b].rot;
 		}
 	}
 
@@ -120,3 +122,16 @@ public class BlockController : MonoBehaviour
 		yield return Tick();
 	}
 }
+
+public struct TempTransform
+{
+	public Vector3 pos;
+	public Quaternion rot;
+
+	public TempTransform(Vector3 pos, Quaternion rot)
+	{
+		this.pos = pos;
+		this.rot = rot;
+	}
+}
+
