@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
-	public List<Block> blocks = new List<Block>();
+	//	public List<Block> blocks = new List<Block>();
+	public Dictionary<Vector3Int, Block> blocks = new Dictionary<Vector3Int, Block>();
 	public List<Block> blocksToActivate = new List<Block>();
 	public List<Block> blocksToFall = new List<Block>();
 	public Dictionary<Block, TempTransform> initLocs = new Dictionary<Block, TempTransform>();
@@ -20,14 +21,9 @@ public class BlockController : MonoBehaviour
 	{
 		buildMenu.SetActive(false);
 		playMenu.SetActive(true);
-		blocks.Clear();
 		initLocs.Clear();
 		foreach(Block b in GameObject.FindObjectsOfType<Block>())
 		{
-			blocks.Add(b);
-			Vector3 pos = b.transform.position;
-			b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
-			b.transform.position = b.loc;
 			initLocs.Add(b, new TempTransform(b.transform.root.position, b.transform.root.rotation));
 		}
 		StartCoroutine(Tick());
@@ -35,36 +31,48 @@ public class BlockController : MonoBehaviour
 
 	public void Stop()
 	{
+		Time.timeScale = 1;
 		StopAllCoroutines();
 		buildMenu.SetActive(true);
 		playMenu.SetActive(false);
 		foreach(Block b in initLocs.Keys)
 		{
-			b.Deactivate(1);
-			b.transform.position = initLocs[b].pos;
-			b.transform.rotation = initLocs[b].rot;
+			ResetBlock(b);
 		}
 	}
 
 	public void DeleteBlock(Block b)
 	{
-		blocks.Remove(b);
+		blocks.Remove(b.loc);
 		DestroyImmediate(b.gameObject);
 	}
 
 	IEnumerator Tick()
 	{
+		blocks.Clear();
 		List<Block> blocksToCheck = new List<Block>();
 		List<Block> checkedBlocks = new List<Block>();
 		blocksToActivate.Clear();
 		blocksToFall.Clear();
-		foreach (Block b in blocks)
+
+		foreach (Block b in GameObject.FindObjectsOfType<Block>())
+		{
+			if (b.gameObject.activeSelf)
+			{
+				Vector3 pos = b.transform.position;
+				b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+				b.transform.position = b.loc;
+				blocks.Add(b.loc, b);
+			}
+		}
+
+		foreach (Block b in blocks.Values)
 		{
 			Vector3 pos = b.transform.position;
 			b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
 			b.transform.position = b.loc;
 		}
-		foreach (Block b in blocks)
+		foreach (Block b in blocks.Values)
 		{
 			b.CheckSides();
 			if (b.GetComponent<PowerSourceBlock>() != null)
@@ -108,7 +116,7 @@ public class BlockController : MonoBehaviour
 			time += Time.deltaTime * tickSpeed;
 			if (time > 1)
 				time = 1;
-			foreach(Block b in blocks)
+			foreach(Block b in blocks.Values)
 			{
 				if (blocksToActivate.Contains(b))
 					b.Activate(time);
@@ -120,6 +128,18 @@ public class BlockController : MonoBehaviour
 			yield return null;
 		}
 		yield return Tick();
+	}
+
+	public void ResetBlock(Block b)
+	{
+		b.Deactivate(1);
+		b.transform.position = initLocs[b].pos;
+		b.transform.rotation = initLocs[b].rot;
+	}
+
+	public void CollisionWarning(Block b)
+	{
+		StopAllCoroutines();
 	}
 }
 

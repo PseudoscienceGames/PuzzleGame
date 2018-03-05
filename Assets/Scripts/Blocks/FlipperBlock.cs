@@ -15,6 +15,15 @@ public class FlipperBlock : Block
 
 	public override void Activate(float time)
 	{
+		List<Vector3Int> toCheck = new List<Vector3Int>();
+		toCheck.Add(loc + Vector3Int.up + new Vector3Int(0, 0, 1));
+		toCheck.Add(loc + Vector3Int.up);
+		toCheck.Add(loc + Vector3Int.up + new Vector3Int(0, 0, -1));
+		foreach (Vector3Int v in toCheck)
+		{
+			if (BlockController.Instance.blocks.ContainsKey(v))
+				BlockController.Instance.CollisionWarning(BlockController.Instance.blocks[v]);
+		}
 		if (!flipped)
 		{
 			if (grabbed == null && sides[5].adjacentSide != null)
@@ -22,7 +31,7 @@ public class FlipperBlock : Block
 				grabbed = sides[5].adjacentSide.transform.root;
 				grabbed.parent = arm;
 			}
-			arm.transform.eulerAngles = new Vector3(180f * time, 0, 0);
+			arm.transform.localEulerAngles = new Vector3(180f * time, 0, 0);
 
 			if (time == 1)
 			{
@@ -31,19 +40,26 @@ public class FlipperBlock : Block
 				{
 					Debug.Log("deparent");
 					grabbed.parent = null;
+					grabbed.root.localScale = Vector3.one;
+					grabbed = null;
 				}
 			}
 		}
 	}
 	public override void Deactivate(float time)
 	{
-		if (flipped)
-		{
-			arm.transform.eulerAngles = new Vector3(180f * (1f - time), 0, 0);
+		if(flipped)
+			arm.transform.localEulerAngles = new Vector3(180f * (1f - time), 0, 0);
 
-			if (time == 1)
+		if (time == 1)
+		{
+			arm.transform.localEulerAngles = Vector3.zero;
+			flipped = false;
+			if (grabbed != null)
 			{
-				flipped = false;
+				grabbed.parent = null;
+				BlockController.Instance.ResetBlock(grabbed.GetComponent<Block>());
+				grabbed = null;
 			}
 		}
 	}

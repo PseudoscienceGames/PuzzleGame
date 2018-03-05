@@ -5,7 +5,8 @@ using UnityEngine;
 public class PistonBlock : Block
 {
 	public Transform piston;
-	bool extended = false;
+	public GameObject pistonBlock;
+	public bool extended = false;
 
 	private void Awake()
 	{
@@ -20,7 +21,10 @@ public class PistonBlock : Block
 			if (sides[0].adjacentSide != null)
 				sides[0].adjacentSide.transform.root.GetComponent<Block>().Move(transform.up, time);
 			if (time == 1)
+			{
 				extended = true;
+				pistonBlock.SetActive(true);
+			}
 		}
 	}
 	public override void Deactivate(float time)
@@ -29,7 +33,10 @@ public class PistonBlock : Block
 		{
 			piston.transform.position = (piston.transform.up * (1 - time)) + transform.position;
 			if (time == 1)
+			{
 				extended = false;
+				pistonBlock.SetActive(false);
+			}
 		}
 	}
 

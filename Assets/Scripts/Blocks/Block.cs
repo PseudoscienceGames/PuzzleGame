@@ -9,6 +9,7 @@ public class Block : MonoBehaviour
 
 	public List<Side> sides = new List<Side>();
 	public bool active;
+	public bool moving;
 
 	public virtual void Activate(float time)
 	{
@@ -50,7 +51,8 @@ public class Block : MonoBehaviour
 	{
 		Side s = null;
 		dir = transform.InverseTransformDirection(dir);
-
+		dir = Vector3Int.RoundToInt(dir);
+		Debug.Log(dir.ToString("F8") + " " + (-Vector3.up).ToString("F8") + " " + (dir == -Vector3.up));
 		if (dir == Vector3.up)
 			s = sides[0];
 		if (dir == -Vector3.up)
