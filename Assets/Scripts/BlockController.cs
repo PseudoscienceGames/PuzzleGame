@@ -75,7 +75,7 @@ public class BlockController : MonoBehaviour
 		foreach (Block b in blocks.Values)
 		{
 			b.CheckSides();
-			if (b.GetComponent<PowerSourceBlock>() != null)
+			if (b.selfPowered)
 				blocksToCheck.Add(b);
 			if (b.DirToSide(-Vector3.up).adjacentSide == null && b.loc.y > 0)
 				blocksToFall.Add(b);

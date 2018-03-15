@@ -29,6 +29,7 @@ public class FlipperBlock : Block
 			if (grabbed == null && sides[5].adjacentSide != null)
 			{
 				grabbed = sides[5].adjacentSide.transform.root;
+				grabbed.GetComponent<Block>().moving = true;
 				grabbed.parent = arm;
 			}
 			arm.transform.localEulerAngles = new Vector3(180f * time, 0, 0);
@@ -39,6 +40,7 @@ public class FlipperBlock : Block
 				if (grabbed != null)
 				{
 					Debug.Log("deparent");
+					grabbed.GetComponent<Block>().moving = false;
 					grabbed.parent = null;
 					grabbed.root.localScale = Vector3.one;
 					grabbed = null;

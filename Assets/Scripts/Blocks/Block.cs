@@ -8,6 +8,7 @@ public class Block : MonoBehaviour
 	public int dir = 1;
 
 	public List<Side> sides = new List<Side>();
+	public bool selfPowered;
 	public bool active;
 	public bool moving;
 
@@ -41,6 +42,7 @@ public class Block : MonoBehaviour
 
 	public void Move(Vector3 dir, float time)
 	{
+		Debug.Log(name + " " + moving);
 		transform.position = loc + (dir * time);
 		Side s = DirToSide(dir);
 		if (s != null && s.adjacentSide != null)
