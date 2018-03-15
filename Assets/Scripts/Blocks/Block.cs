@@ -5,12 +5,7 @@ using UnityEngine;
 public class Block : MonoBehaviour
 {
 	public Vector3Int loc;
-	public int dir = 1;
-
-	public List<Side> sides = new List<Side>();
-	public bool selfPowered;
-	public bool active;
-	public bool moving;
+	public bool grabbed;
 
 	public virtual void Activate(float time)
 	{
@@ -22,50 +17,18 @@ public class Block : MonoBehaviour
 
 	}
 
-	public virtual void CheckSides()
-	{
-		sides.Clear();
-		sides = new List<Side>(transform.GetComponentsInChildren<Side>());
-		foreach(Side side in sides)
-		{
-			List<Collider> cols = new List<Collider>(Physics.OverlapSphere(side.transform.position, .2f, 1 << LayerMask.NameToLayer("Side")));
-			side.adjacentSide = null;
-			foreach (Collider col in cols)
-			{
-				if (col.transform.root != transform)
-				{
-					side.adjacentSide = col.GetComponent<Side>();
-				}
-			}
-		}
-	}
-
 	public void Move(Vector3 dir, float time)
 	{
-		Debug.Log(name + " " + moving);
 		transform.position = loc + (dir * time);
-		Side s = DirToSide(dir);
-		if (s != null && s.adjacentSide != null)
-			s.adjacentSide.transform.root.GetComponent<Block>().Move(dir, time);
+	}
+	public virtual bool CheckAction()
+	{
+		return false;
 	}
 
-	public Side DirToSide(Vector3 dir)
+	public Vector3Int VectorToInt(Vector3 v)
 	{
-		Side s = null;
-		dir = transform.InverseTransformDirection(dir);
-		dir = Vector3Int.RoundToInt(dir);
-		if (dir == Vector3.up)
-			s = sides[0];
-		if (dir == -Vector3.up)
-			s = sides[1];
-		if (dir == -Vector3.right)
-			s = sides[2];
-		if (dir == Vector3.right)
-			s = sides[3];
-		if (dir == Vector3.forward)
-			s = sides[4];
-		if (dir == -Vector3.forward)
-			s = sides[5];
-		return s;
+		Vector3Int i = new Vector3Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.y), Mathf.RoundToInt(v.z));
+		return i;
 	}
 }

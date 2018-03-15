@@ -18,8 +18,6 @@ public class PistonBlock : Block
 		if (!extended)
 		{
 			piston.transform.position = (piston.transform.up * time) + transform.position;
-			if (sides[0].adjacentSide != null)
-				sides[0].adjacentSide.transform.root.GetComponent<Block>().Move(transform.up, time);
 			if (time == 1)
 			{
 				extended = true;

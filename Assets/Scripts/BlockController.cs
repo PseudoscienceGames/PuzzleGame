@@ -6,8 +6,7 @@ public class BlockController : MonoBehaviour
 {
 	//	public List<Block> blocks = new List<Block>();
 	public Dictionary<Vector3Int, Block> blocks = new Dictionary<Vector3Int, Block>();
-	public List<Block> blocksToActivate = new List<Block>();
-	public List<Block> blocksToFall = new List<Block>();
+	public List<Block> actingBlocks = new List<Block>();
 	public Dictionary<Block, TempTransform> initLocs = new Dictionary<Block, TempTransform>();
 	public float time;
 	public float tickSpeed;
@@ -50,10 +49,6 @@ public class BlockController : MonoBehaviour
 	IEnumerator Tick()
 	{
 		blocks.Clear();
-		List<Block> blocksToCheck = new List<Block>();
-		List<Block> checkedBlocks = new List<Block>();
-		blocksToActivate.Clear();
-		blocksToFall.Clear();
 
 		foreach (Block b in GameObject.FindObjectsOfType<Block>())
 		{
@@ -63,51 +58,11 @@ public class BlockController : MonoBehaviour
 				b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
 				b.transform.position = b.loc;
 				blocks.Add(b.loc, b);
-			}
-		}
-
-		foreach (Block b in blocks.Values)
-		{
-			Vector3 pos = b.transform.position;
-			b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
-			b.transform.position = b.loc;
-		}
-		foreach (Block b in blocks.Values)
-		{
-			b.CheckSides();
-			if (b.selfPowered)
-				blocksToCheck.Add(b);
-			if (b.DirToSide(-Vector3.up).adjacentSide == null && b.loc.y > 0)
-				blocksToFall.Add(b);
-		}
-		while(blocksToCheck.Count > 0)
-		{
-			Block b = blocksToCheck[0];
-			foreach (Side s in b.sides)
-			{
-				if(s.adjacentSide != null && s.type == s.adjacentSide.type && s.type != SideType.Base && !checkedBlocks.Contains(s.adjacentSide.transform.root.GetComponent<Block>()))
+				if(b.CheckAction())
 				{
-					if(s.type != SideType.Gear || s.transform.root.up == s.adjacentSide.transform.root.up || s.transform.root.up == -s.adjacentSide.transform.root.up)
-						blocksToCheck.Add(s.adjacentSide.transform.root.GetComponent<Block>());
-					if (s.type == SideType.Gear)
-					{
-						if (s.transform.root.up == -s.adjacentSide.transform.root.up)
-							s.adjacentSide.transform.root.GetComponent<Block>().dir = s.transform.root.GetComponent<Block>().dir;
-						else
-							s.adjacentSide.transform.root.GetComponent<Block>().dir = -s.transform.root.GetComponent<Block>().dir;
-					}
-						if (s.type == SideType.Axle)
-					{
-						if(s.transform.root.rotation == s.adjacentSide.transform.root.rotation)
-							s.adjacentSide.transform.root.GetComponent<Block>().dir = s.transform.root.GetComponent<Block>().dir;
-						else
-							s.adjacentSide.transform.root.GetComponent<Block>().dir = -s.transform.root.GetComponent<Block>().dir;
-					}
+					actingBlocks.Add(b);
 				}
 			}
-			blocksToActivate.Add(b);
-			checkedBlocks.Add(b);
-			blocksToCheck.RemoveAt(0);
 		}
 
 		time = 0;
@@ -116,14 +71,20 @@ public class BlockController : MonoBehaviour
 			time += Time.deltaTime * tickSpeed;
 			if (time > 1)
 				time = 1;
-			foreach(Block b in blocks.Values)
+			foreach (Block b in actingBlocks)
 			{
-				if (blocksToActivate.Contains(b))
+				if (b.GetComponent<BotBlock>() == null)
+				{
 					b.Activate(time);
-				else
-					b.Deactivate(time);
-				if (blocksToFall.Contains(b))
-					b.Move(Vector3.down, time);
+				}
+			}
+			foreach (Block b in actingBlocks)
+			{
+				if (b.GetComponent<BotBlock>() != null)
+				{
+					b.Activate(time);
+					//Debug.Log(b.name + " " + b.grabbed);
+				}
 			}
 			yield return null;
 		}
