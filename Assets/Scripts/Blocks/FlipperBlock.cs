@@ -5,76 +5,70 @@ using UnityEngine;
 public class FlipperBlock : Block
 {
 	public Transform arm;
-	public bool flipped = false;
 	public Transform grabbedBlock;
+	public bool flipped = false;
 
 	private void Awake()
 	{
 		arm = transform.Find("Arm");
 	}
 
-	public override bool CheckAction()
+	public override bool CheckToActivate()
 	{
-		if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)))
+		//add a check for blocks that may be collided with
+		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)) && !flipped)
 		{
-			if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)))
+			Block b = BlockController.Instance.blocks[VectorToInt(loc - transform.forward)];
+			if (!b.grabbed)
 			{
-				grabbedBlock = BlockController.Instance.blocks[VectorToInt(loc - transform.forward)].transform;
-				grabbedBlock.GetComponent<Block>().grabbed = true;
-				grabbedBlock.parent = arm;
+				grabbedBlock = b.transform;
+				b.grabbed = true;
+				if (BlockController.Instance.blocksToActivate.Contains(b))
+					BlockController.Instance.blocksToActivate.Remove(b);
 			}
 			return true;
 		}
-		else
-			return false;
-
+		if (flipped)
+			return true;
+		return false;
 	}
 
 	public override void Activate(float time)
 	{
-		if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)))
+		if (!flipped)
 		{
-			List<Vector3Int> toCheck = new List<Vector3Int>();
-			toCheck.Add(loc + Vector3Int.up + new Vector3Int(0, 0, 1));
-			toCheck.Add(loc + Vector3Int.up);
-			toCheck.Add(loc + Vector3Int.up + new Vector3Int(0, 0, -1));
-			foreach (Vector3Int v in toCheck)
-			{
-				if (BlockController.Instance.blocks.ContainsKey(v))
-					BlockController.Instance.CollisionWarning(BlockController.Instance.blocks[v]);
-			}
-			if (!flipped)
-			{
-				if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)))
-				{
-					grabbedBlock = BlockController.Instance.blocks[VectorToInt(loc - transform.forward)].transform;
-					grabbedBlock.GetComponent<Block>().grabbed = true;
-					grabbedBlock.parent = arm;
-				}
-				arm.transform.localEulerAngles = new Vector3(180f * time, 0, 0);
+			grabbedBlock.parent = arm;
+			arm.localEulerAngles = new Vector3(180f * time, 0, 0);
 
-				if (time == 1)
-				{
-					flipped = true;
-					if (grabbedBlock != null)
-					{
-						grabbedBlock.GetComponent<Block>().grabbed = false;
-						grabbedBlock.parent = null;
-						grabbedBlock.root.localScale = Vector3.one;
-						grabbedBlock = null;
-					}
-				}
-				return;
-			}
-		}
-		if (flipped)
-		{
-			arm.transform.localEulerAngles = new Vector3(180f * (1f - time), 0, 0);
 			if (time == 1)
 			{
-				arm.transform.localEulerAngles = Vector3.zero;
+				flipped = true;
+				if (grabbedBlock != null)
+				{
+					grabbedBlock.parent = null;
+					grabbedBlock.localScale = Vector3.one;
+					grabbedBlock.GetComponent<Block>().grabbed = false;
+					grabbedBlock = null;
+				}
+			}
+
+		}
+		else
+		{
+			arm.localEulerAngles = new Vector3(180f * (1 - time), 0, 0);
+			if (time == 1)
+			{
+				arm.transform.localPosition = Vector3.zero;
 				flipped = false;
 			}
 		}
+	}
+
+	public override void Reset()
+	{
+		base.Reset();
+		grabbedBlock = null;
+		arm.localEulerAngles = Vector3.zero;
+		flipped = false;
 	}
 }

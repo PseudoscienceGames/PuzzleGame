@@ -6,7 +6,7 @@ public class BlockController : MonoBehaviour
 {
 	//	public List<Block> blocks = new List<Block>();
 	public Dictionary<Vector3Int, Block> blocks = new Dictionary<Vector3Int, Block>();
-	public List<Block> actingBlocks = new List<Block>();
+	public List<Block> blocksToActivate = new List<Block>();
 	public Dictionary<Block, TempTransform> initLocs = new Dictionary<Block, TempTransform>();
 	public float time;
 	public float tickSpeed;
@@ -28,6 +28,43 @@ public class BlockController : MonoBehaviour
 		StartCoroutine(Tick());
 	}
 
+	IEnumerator Tick()
+	{
+		blocks.Clear();
+		blocksToActivate.Clear();
+
+		foreach (Block b in GameObject.FindObjectsOfType<Block>())
+		{
+			if (b.gameObject.activeSelf)
+			{
+				Vector3 pos = b.transform.position;
+				b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+				b.transform.position = b.loc;
+				blocks.Add(b.loc, b);
+			}
+		}
+
+		foreach(Block b in blocks.Values)
+		{
+			if (b.CheckToActivate())
+				blocksToActivate.Add(b);
+		}
+
+		time = 0;
+		while (time < 1)
+		{
+			time += Time.deltaTime * tickSpeed;
+			if (time > 1)
+				time = 1;
+			foreach (Block b in blocksToActivate)
+			{
+				b.Activate(time);
+			}
+			yield return null;
+		}
+		yield return Tick();
+	}
+
 	public void Stop()
 	{
 		Time.timeScale = 1;
@@ -46,55 +83,12 @@ public class BlockController : MonoBehaviour
 		DestroyImmediate(b.gameObject);
 	}
 
-	IEnumerator Tick()
-	{
-		blocks.Clear();
-
-		foreach (Block b in GameObject.FindObjectsOfType<Block>())
-		{
-			if (b.gameObject.activeSelf)
-			{
-				Vector3 pos = b.transform.position;
-				b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
-				b.transform.position = b.loc;
-				blocks.Add(b.loc, b);
-				if(b.CheckAction())
-				{
-					actingBlocks.Add(b);
-				}
-			}
-		}
-
-		time = 0;
-		while(time < 1)
-		{
-			time += Time.deltaTime * tickSpeed;
-			if (time > 1)
-				time = 1;
-			foreach (Block b in actingBlocks)
-			{
-				if (b.GetComponent<BotBlock>() == null)
-				{
-					b.Activate(time);
-				}
-			}
-			foreach (Block b in actingBlocks)
-			{
-				if (b.GetComponent<BotBlock>() != null)
-				{
-					b.Activate(time);
-					//Debug.Log(b.name + " " + b.grabbed);
-				}
-			}
-			yield return null;
-		}
-		yield return Tick();
-	}
-
 	public void ResetBlock(Block b)
 	{
-		b.Deactivate(1);
+		b.Reset();
 		b.transform.position = initLocs[b].pos;
+		Vector3 pos = b.transform.position;
+		b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
 		b.transform.rotation = initLocs[b].rot;
 	}
 

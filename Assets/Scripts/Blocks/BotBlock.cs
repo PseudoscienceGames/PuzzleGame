@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BotBlock : Block
 {
-	public override bool CheckAction()
+	public override bool CheckToActivate()
 	{
 		if (!grabbed)
 			return true;
