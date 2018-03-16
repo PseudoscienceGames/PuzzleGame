@@ -18,7 +18,8 @@ public class PistonBlock : Block
 	{
 		//add a check for blocks that may be collided with
 		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
-			!extended && !BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + (transform.up * 2f))))
+			!extended && !BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + (transform.up * 2f))) &&
+			(color == 0 || BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color))
 		{
 			Block b = BlockController.Instance.blocks[VectorToInt(loc + transform.up)];
 			if (!b.grabbed && !b.locked)

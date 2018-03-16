@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlipperBlock : Block
+public class QuarterFlipperBlock : Block
 {
 	public Transform arm;
 	public Transform grabbedBlock;
@@ -39,7 +39,7 @@ public class FlipperBlock : Block
 		if (!flipped)
 		{
 			grabbedBlock.parent = arm;
-			arm.localEulerAngles = new Vector3(180f * time, 0, 0);
+			arm.localEulerAngles = new Vector3(90f * time, 0, 0);
 
 			if (time == 1)
 			{
@@ -56,7 +56,7 @@ public class FlipperBlock : Block
 		}
 		else
 		{
-			arm.localEulerAngles = new Vector3(180f * (1 - time), 0, 0);
+			arm.localEulerAngles = new Vector3(90f * (1 - time), 0, 0);
 			if (time == 1)
 			{
 				arm.transform.localPosition = Vector3.zero;

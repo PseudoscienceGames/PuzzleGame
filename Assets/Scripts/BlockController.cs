@@ -18,12 +18,15 @@ public class BlockController : MonoBehaviour
 
 	public void Initialize()
 	{
+		BuildController.Instance.gameObject.SetActive(false);
 		buildMenu.SetActive(false);
 		playMenu.SetActive(true);
 		initLocs.Clear();
 		foreach(Block b in GameObject.FindObjectsOfType<Block>())
 		{
 			initLocs.Add(b, new TempTransform(b.transform.root.position, b.transform.root.rotation));
+			if (b.GetComponent<SpawnBlock>() != null)
+				b.GetComponent<SpawnBlock>().Init();
 		}
 		StartCoroutine(Tick());
 	}
@@ -69,12 +72,19 @@ public class BlockController : MonoBehaviour
 	{
 		Time.timeScale = 1;
 		StopAllCoroutines();
+		BuildController.Instance.gameObject.SetActive(true);
 		buildMenu.SetActive(true);
 		playMenu.SetActive(false);
-		foreach(Block b in initLocs.Keys)
+		List<Block> blocksToDelete = new List<Block>();
+		foreach(Block b in blocks.Values)
 		{
-			ResetBlock(b);
+			if (initLocs.ContainsKey(b))
+				ResetBlock(b);
+			else
+				blocksToDelete.Add(b);
 		}
+		foreach (Block b in blocksToDelete)
+			DeleteBlock(b);
 	}
 
 	public void DeleteBlock(Block b)
