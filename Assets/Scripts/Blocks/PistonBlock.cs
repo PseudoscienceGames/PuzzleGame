@@ -6,6 +6,7 @@ public class PistonBlock : Block
 {
 	public Transform piston;
 	public Transform grabbedBlock;
+	public GameObject pistonBlock;
 	public bool extended = false;
 
 	private void Awake()
@@ -16,17 +17,18 @@ public class PistonBlock : Block
 	public override bool CheckToActivate()
 	{
 		//add a check for blocks that may be collided with
-		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) && !extended)
+		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
+			!extended && !BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + (transform.up * 2f))))
 		{
 			Block b = BlockController.Instance.blocks[VectorToInt(loc + transform.up)];
-			if (!b.grabbed)
+			if (!b.grabbed && !b.locked)
 			{
 				grabbedBlock = b.transform;
 				b.grabbed = true;
 				if (BlockController.Instance.blocksToActivate.Contains(b))
 					BlockController.Instance.blocksToActivate.Remove(b);
+				return true;
 			}
-			return true;
 		}
 		if (extended)
 			return true;
@@ -42,6 +44,7 @@ public class PistonBlock : Block
 
 			if (time == 1)
 			{
+				pistonBlock.SetActive(true);
 				extended = true;
 				if (grabbedBlock != null)
 				{
@@ -56,6 +59,7 @@ public class PistonBlock : Block
 			piston.localPosition = new Vector3(0, (1f - time), 0);
 			if (time == 1)
 			{
+				pistonBlock.SetActive(false);
 				piston.transform.localPosition = Vector3.zero;
 				extended = false;
 			}

@@ -6,6 +6,7 @@ public class Block : MonoBehaviour
 {
 	public Vector3Int loc;
 	public bool grabbed;
+	public bool locked;
 
 	public virtual void Activate(float time)
 	{
