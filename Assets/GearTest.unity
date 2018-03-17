@@ -134,9 +134,12 @@ MonoBehaviour:
   locked: 0
   color: 0
   toSpawn:
-  - {fileID: 1517509390470630, guid: e8747fc1713fda945bee69e22b004d00, type: 2}
-  - {fileID: 1517509390470630, guid: e8747fc1713fda945bee69e22b004d00, type: 2}
-  - {fileID: 1517509390470630, guid: e8747fc1713fda945bee69e22b004d00, type: 2}
+  - {fileID: 1383562189713432, guid: 70a5b59cea9b3944383782f2d6503bde, type: 2}
+  - {fileID: 1131797188525346, guid: 29dfd2a723913ab47957812a0289d066, type: 2}
+  - {fileID: 1969921247925352, guid: 9677588d429b22941bbc9a4b48231c61, type: 2}
+  - {fileID: 1525353373532246, guid: 8674fdf8f6c8f9f459b61e7848f85030, type: 2}
+  - {fileID: 1043379857161312, guid: 507e35984d2571b40a7ca2d41fc0e178, type: 2}
+  - {fileID: 1369509523953498, guid: 7c9e2da92a4a60a4aab2a0f3e5b60df5, type: 2}
   wait: 0
 --- !u!1 &116921758
 GameObject:
@@ -1093,7 +1096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blocksToActivate: []
   time: 0
-  tickSpeed: 0.5
+  tickSpeed: 5
   buildMenu: {fileID: 1289901764}
   playMenu: {fileID: 1812479385}
 --- !u!4 &606527371
