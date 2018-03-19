@@ -6,7 +6,8 @@ public class SpawnBlock : Block
 {
 	public List<GameObject> toSpawn = new List<GameObject>();
 	List<GameObject> storedSpawn = new List<GameObject>();
-	public bool wait = false;
+	private int wait;
+	public int waitCount;
 
 	public void Init()
 	{
@@ -15,15 +16,16 @@ public class SpawnBlock : Block
 
 	public override bool CheckToActivate()
 	{
-		if(wait)
+		if (toSpawn.Count > 0)
 		{
-			wait = false;
-		}
-		else if (toSpawn.Count > 0)
-		{
-			Instantiate(toSpawn[0], loc + transform.up, transform.rotation);
-			toSpawn.RemoveAt(0);
-			wait = true;
+			if (wait == waitCount)
+				wait = 0;
+			if (wait == 0)
+			{
+				Instantiate(toSpawn[0], loc + transform.up, transform.rotation);
+				toSpawn.RemoveAt(0);
+			}
+			wait++;
 		}
 		
 

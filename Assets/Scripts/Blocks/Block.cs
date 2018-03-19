@@ -21,7 +21,7 @@ public class Block : MonoBehaviour
 
 	public void Move(Vector3 dir, float time)
 	{
-		transform.position = loc + (dir * time);
+		GetComponent<Rigidbody>().MovePosition(loc + (dir * time));
 	}
 
 	public virtual void Reset()
