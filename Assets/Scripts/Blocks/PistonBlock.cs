@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class PistonBlock : Block
 {
-	public Transform piston;
 	public Transform grabbedBlock;
 	public GameObject pistonBlock;
 	public bool extended = false;
 
 	private void Awake()
 	{
-		piston = transform.Find("Piston");
+		moveyBit = transform.Find("Piston");
 	}
 
 	public override bool CheckToActivate()
@@ -40,8 +39,8 @@ public class PistonBlock : Block
 	{
 		if (!extended)
 		{
-			piston.localPosition = new Vector3(0, time, 0);
-			grabbedBlock.position = piston.position + piston.up;
+			moveyBit.localPosition = new Vector3(0, time, 0);
+			grabbedBlock.GetComponent<Block>().Move(transform.up, time);
 
 			if (time == 1)
 			{
@@ -57,11 +56,11 @@ public class PistonBlock : Block
 		}
 		else
 		{
-			piston.localPosition = new Vector3(0, (1f - time), 0);
+			moveyBit.localPosition = new Vector3(0, (1f - time), 0);
 			if (time == 1)
 			{
 				pistonBlock.SetActive(false);
-				piston.transform.localPosition = Vector3.zero;
+				moveyBit.transform.localPosition = Vector3.zero;
 				extended = false;
 			}
 		}
@@ -70,8 +69,10 @@ public class PistonBlock : Block
 	public override void Reset()
 	{
 		base.Reset();
+		pistonBlock.gameObject.SetActive(false);
+		//pistonBlock.transform.position = transform.position;
 		grabbedBlock = null;
-		piston.localPosition = Vector3.zero;
+		moveyBit.localPosition = Vector3.zero;
 		extended = false;
 	}
 	//public override void Deactivate(float time)

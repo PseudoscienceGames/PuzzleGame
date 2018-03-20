@@ -4,24 +4,31 @@ using UnityEngine;
 
 public class ExitBlock : Block
 {
+	public int botsNeeded;
 	public int successCount;
 
 	public override bool CheckToActivate()
 	{
 		if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
-			BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color)
+			(BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color || color == 0))
 		{
 			TakeBot(BlockController.Instance.blocks[VectorToInt(loc + transform.up)]);
-			//if (successCount == 0)
-			//	BlockController.CheckSuccess();
+			if (successCount == 0)
+				BlockController.Instance.CheckSuccess();
 		}
 		return false;
+	}
+
+	public override void Reset()
+	{
+		successCount = botsNeeded;
+		base.Reset();
 	}
 
 	void TakeBot(Block b)
 	{
 		successCount--;
-		DestroyImmediate(b.gameObject);
+		BlockController.Instance.toDelete.Add(b);
 		//
 	}
 }

@@ -52,23 +52,34 @@ public class CameraControl : MonoBehaviour
 			camTargetEuler.x = Mathf.Clamp(camTargetEuler.x, camXRotMin, camXRotMax);
 			cameraPivot.transform.eulerAngles = camTargetEuler;
 		}
-		else
+		else if(Input.GetAxis("Mouse ScrollWheel") != 0)
 		{
-			//Zoom camera
-			zoom = -Camera.main.transform.localPosition.z;
-			if (zoom >= zoomMin && zoom <= zoomMax)
+			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+			if (Physics.Raycast(ray, out hit) && hit.transform.GetComponent<Block>() != null)
 			{
-				if (Camera.main.orthographic)
-					Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-				else
+				Block b = hit.transform.GetComponent<Block>();
+				if (b.canChangeColor)
+					b.CycleColor(Mathf.RoundToInt(Mathf.Sign(Input.GetAxis("Mouse ScrollWheel"))));
+			}
+			else
+			{
+				//Zoom camera
+				zoom = -Camera.main.transform.localPosition.z;
+				if (zoom >= zoomMin && zoom <= zoomMax)
 				{
-					targetZoom += -(Input.GetAxisRaw("Mouse ScrollWheel")) * zoomSpeed;
-					if (targetZoom > zoomMax)
-						targetZoom = zoomMax;
-					if (targetZoom < zoomMin)
-						targetZoom = zoomMin;
-					Vector3 zoomV = new Vector3(0, 0, -targetZoom);
-					Camera.main.transform.localPosition = Vector3.SmoothDamp(Camera.main.transform.localPosition, zoomV, ref zVelocity, zoomSmoothTime);
+					if (Camera.main.orthographic)
+						Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+					else
+					{
+						targetZoom += -(Input.GetAxisRaw("Mouse ScrollWheel")) * zoomSpeed;
+						if (targetZoom > zoomMax)
+							targetZoom = zoomMax;
+						if (targetZoom < zoomMin)
+							targetZoom = zoomMin;
+						Vector3 zoomV = new Vector3(0, 0, -targetZoom);
+						Camera.main.transform.localPosition = Vector3.SmoothDamp(Camera.main.transform.localPosition, zoomV, ref zVelocity, zoomSmoothTime);
+					}
 				}
 			}
 		}

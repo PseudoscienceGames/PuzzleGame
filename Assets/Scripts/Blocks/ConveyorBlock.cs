@@ -19,6 +19,11 @@ public class ConveyorBlock : Block
 			return false;
 	}
 
+	private void Awake()
+	{
+		moveyBit = transform.Find("Belt");
+	}
+
 	public override void Activate(float time)
 	{
 		blockAbove.Move(transform.forward, time);

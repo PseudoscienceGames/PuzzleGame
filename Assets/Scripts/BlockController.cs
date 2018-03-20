@@ -7,11 +7,13 @@ public class BlockController : MonoBehaviour
 	//	public List<Block> blocks = new List<Block>();
 	public Dictionary<Vector3Int, Block> blocks = new Dictionary<Vector3Int, Block>();
 	public List<Block> blocksToActivate = new List<Block>();
+	public List<Block> toDelete = new List<Block>();
 	public Dictionary<Block, TempTransform> initLocs = new Dictionary<Block, TempTransform>();
 	public float time;
 	public float tickSpeed;
 	public GameObject buildMenu;
 	public GameObject playMenu;
+	public List<Material> colorMats = new List<Material>();
 
 	public static BlockController Instance;
 	private void Awake(){ Instance = this; }
@@ -43,15 +45,28 @@ public class BlockController : MonoBehaviour
 				Vector3 pos = b.transform.position;
 				b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
 				b.transform.position = b.loc;
-				blocks.Add(b.loc, b);
+				if (blocks.ContainsKey(b.loc))
+				{
+					Debug.Log(b.name + " " + blocks[b.loc].name);
+					CollisionWarning(b);
+				}
+				else
+					blocks.Add(b.loc, b);
 			}
 		}
 
+		toDelete.Clear();
 		foreach(Block b in blocks.Values)
 		{
 			if (b.CheckToActivate())
 				blocksToActivate.Add(b);
 		}
+
+		foreach (Block b in toDelete)
+		{
+			DeleteBlock(b);
+		}
+
 
 		time = 0;
 		while (time < 1)
@@ -76,11 +91,11 @@ public class BlockController : MonoBehaviour
 		buildMenu.SetActive(true);
 		playMenu.SetActive(false);
 		List<Block> blocksToDelete = new List<Block>();
-		foreach(Block b in blocks.Values)
+		foreach(Block b in GameObject.FindObjectsOfType<Block>())
 		{
 			if (initLocs.ContainsKey(b))
 				ResetBlock(b);
-			else
+			else if(b.name != "InvisBlock")
 				blocksToDelete.Add(b);
 		}
 		foreach (Block b in blocksToDelete)
@@ -90,6 +105,7 @@ public class BlockController : MonoBehaviour
 	public void DeleteBlock(Block b)
 	{
 		blocks.Remove(b.loc);
+		blocksToActivate.Remove(b);
 		DestroyImmediate(b.gameObject);
 	}
 
@@ -105,6 +121,23 @@ public class BlockController : MonoBehaviour
 	public void CollisionWarning(Block b)
 	{
 		StopAllCoroutines();
+	}
+
+	public void CheckSuccess()
+	{
+		bool done = true;
+		foreach(ExitBlock e in GameObject.FindObjectsOfType<ExitBlock>())
+		{
+			if (e.successCount > 0)
+				done = false;
+		}
+		if (done)
+			NextLevel();
+	}
+
+	void NextLevel()
+	{
+		Debug.Log("SUCCESS!");
 	}
 }
 

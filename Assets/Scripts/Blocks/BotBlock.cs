@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class BotBlock : Block
 {
+
+	//private void OnCollisionEnter(Collision collision)
+	//{
+	//	GetComponent<Rigidbody>().useGravity = true;
+	//	enabled = false;
+	//	BlockController.Instance.CollisionWarning(this);
+	//}
+
 	public override bool CheckToActivate()
 	{
 		if (!grabbed)

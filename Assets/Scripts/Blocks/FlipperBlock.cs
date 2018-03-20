@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class FlipperBlock : Block
 {
-	public Transform arm;
 	public Transform grabbedBlock;
 	public bool flipped = false;
 
 	private void Awake()
 	{
-		arm = transform.Find("Arm");
+		moveyBit = transform.Find("Arm");
 	}
 
 	public override bool CheckToActivate()
@@ -38,8 +37,8 @@ public class FlipperBlock : Block
 	{
 		if (!flipped)
 		{
-			grabbedBlock.parent = arm;
-			arm.localEulerAngles = new Vector3(180f * time, 0, 0);
+			grabbedBlock.parent = moveyBit;
+			moveyBit.localEulerAngles = new Vector3(180f * time, 0, 0);
 
 			if (time == 1)
 			{
@@ -56,10 +55,10 @@ public class FlipperBlock : Block
 		}
 		else
 		{
-			arm.localEulerAngles = new Vector3(180f * (1 - time), 0, 0);
+			moveyBit.localEulerAngles = new Vector3(180f * (1 - time), 0, 0);
 			if (time == 1)
 			{
-				arm.transform.localPosition = Vector3.zero;
+				moveyBit.transform.localPosition = Vector3.zero;
 				flipped = false;
 			}
 		}
@@ -69,7 +68,7 @@ public class FlipperBlock : Block
 	{
 		base.Reset();
 		grabbedBlock = null;
-		arm.localEulerAngles = Vector3.zero;
+		moveyBit.localEulerAngles = Vector3.zero;
 		flipped = false;
 	}
 }

@@ -8,6 +8,8 @@ public class Block : MonoBehaviour
 	public bool grabbed;
 	public bool locked;
 	public int color;//0=any 1=red 2=orange 3=yellow 4=green 5=blue 6=purple
+	public bool canChangeColor;
+	public Transform moveyBit;
 
 	public virtual void Activate(float time)
 	{
@@ -34,5 +36,15 @@ public class Block : MonoBehaviour
 	{
 		Vector3Int i = new Vector3Int(Mathf.RoundToInt(v.x), Mathf.RoundToInt(v.y), Mathf.RoundToInt(v.z));
 		return i;
+	}
+
+	public void CycleColor(int i)
+	{
+		color += i;
+		if (color > 6)
+			color = 0;
+		if (color < 0)
+			color = 6;
+		moveyBit.GetComponent<Renderer>().material = BlockController.Instance.colorMats[color];
 	}
 }
