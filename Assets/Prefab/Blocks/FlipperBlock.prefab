@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4415094156934888}
   - component: {fileID: 65845093735244070}
   - component: {fileID: 114413555345538154}
+  - component: {fileID: 54814773583909218}
   m_Layer: 11
   m_Name: FlipperBlock
   m_TagString: Untagged
@@ -185,6 +186,21 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1891393317277086}
   m_Mesh: {fileID: 4300004, guid: a7eddef93d240494caa5e82a42f23f8f, type: 3}
+--- !u!54 &54814773583909218
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1262766954989268}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!65 &65845093735244070
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -192,7 +208,7 @@ BoxCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1262766954989268}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 0.9, y: 0.9, z: 0.9}
@@ -208,11 +224,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b1fd388c223b340a7c85c6fb7b5651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  grabbedBlock: {fileID: 0}
   loc: {x: 0, y: 0, z: 0}
   grabbed: 0
   locked: 0
   color: 0
   canChangeColor: 1
   moveyBit: {fileID: 0}
-  grabbedBlock: {fileID: 0}
   flipped: 0
