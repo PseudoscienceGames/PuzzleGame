@@ -7,7 +7,7 @@ public class ExitBlock : Block
 	public int botsNeeded;
 	public int successCount;
 
-	public override bool CheckToActivate()
+	public override bool TickStart()
 	{
 		if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
 			(BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color || color == 0))

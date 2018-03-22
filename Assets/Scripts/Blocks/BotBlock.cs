@@ -12,7 +12,7 @@ public class BotBlock : Block
 	//	BlockController.Instance.CollisionWarning(this);
 	//}
 
-	public override bool CheckToActivate()
+	public override bool TickStart()
 	{
 		if (!grabbed)
 			return true;
@@ -20,7 +20,7 @@ public class BotBlock : Block
 			return false;
 	}
 
-	public override void Activate(float time)
+	public override void Tick(float time)
 	{
 		if (!grabbed)
 		{

@@ -4,33 +4,33 @@ using UnityEngine;
 
 public class ConveyorBlock : Block
 {
-	public Block blockAbove;
-	public override bool CheckToActivate()
+	private void Awake()
+	{
+		moveyBit = transform.Find("Belt");
+	}
+
+	public override bool TickStart()
 	{
 		if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
 			!BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up + transform.forward)) &&
 			(color == 0 || BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color))
 		{
-			blockAbove = BlockController.Instance.blocks[VectorToInt(loc + transform.up)];
-			blockAbove.grabbed = true;
+			grabbedBlock = BlockController.Instance.blocks[VectorToInt(loc + transform.up)].transform;
+			grabbedBlock.GetComponent<Block>().grabbed = true;
 			return true;
 		}
 		else
 			return false;
 	}
 
-	private void Awake()
+	public override void Tick(float time)
 	{
-		moveyBit = transform.Find("Belt");
+		grabbedBlock.GetComponent<Block>().Move(transform.forward, time);
 	}
 
-	public override void Activate(float time)
+	public override void TickEnd()
 	{
-		blockAbove.Move(transform.forward, time);
-		if (time == 1)
-		{
-			blockAbove.grabbed = false;
-			blockAbove = null;
-		}
+		grabbedBlock.GetComponent<Block>().grabbed = false;
+		grabbedBlock = null;
 	}
 }

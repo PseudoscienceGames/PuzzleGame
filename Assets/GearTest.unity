@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -999,15 +999,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4324680561486190, guid: 5d75c522fbdd2f04aa19e5122d774394, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4324680561486190, guid: 5d75c522fbdd2f04aa19e5122d774394, type: 2}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4324680561486190, guid: 5d75c522fbdd2f04aa19e5122d774394, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4324680561486190, guid: 5d75c522fbdd2f04aa19e5122d774394, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4324680561486190, guid: 5d75c522fbdd2f04aa19e5122d774394, type: 2}
       propertyPath: m_LocalRotation.x
@@ -1041,15 +1041,15 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4794701645397468, guid: aa2ae9a79d402d64e873dcdea4e43d57, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4794701645397468, guid: aa2ae9a79d402d64e873dcdea4e43d57, type: 2}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4794701645397468, guid: aa2ae9a79d402d64e873dcdea4e43d57, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4794701645397468, guid: aa2ae9a79d402d64e873dcdea4e43d57, type: 2}
       propertyPath: m_LocalPosition.z
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4794701645397468, guid: aa2ae9a79d402d64e873dcdea4e43d57, type: 2}
       propertyPath: m_LocalRotation.x

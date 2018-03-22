@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
+	public Transform grabbedBlock;
 	public Vector3Int loc;
 	public bool grabbed;
 	public bool locked;
@@ -11,19 +12,24 @@ public class Block : MonoBehaviour
 	public bool canChangeColor;
 	public Transform moveyBit;
 
-	public virtual void Activate(float time)
-	{
-		
-	}
-
-	public virtual bool CheckToActivate()
+	public virtual bool TickStart()
 	{
 		return false;
 	}
 
+	public virtual void Tick(float time)
+	{
+		
+	}
+
+	public virtual void TickEnd()
+	{
+
+	}
+
 	public void Move(Vector3 dir, float time)
 	{
-		GetComponent<Rigidbody>().MovePosition(loc + (dir * time));
+		transform.position = loc + (dir * time);
 	}
 
 	public virtual void Reset()
@@ -46,5 +52,11 @@ public class Block : MonoBehaviour
 		if (color < 0)
 			color = 6;
 		moveyBit.GetComponent<Renderer>().material = BlockController.Instance.colorMats[color];
+	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if(other.transform != grabbedBlock && other.GetComponent<Block>().grabbedBlock != transform)
+			BlockController.Instance.CollisionWarning(this);
 	}
 }

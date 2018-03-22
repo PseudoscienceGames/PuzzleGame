@@ -14,7 +14,7 @@ public class SpawnBlock : Block
 		storedSpawn = new List<GameObject>(toSpawn);
 	}
 
-	public override bool CheckToActivate()
+	public override bool TickStart()
 	{
 		if (toSpawn.Count > 0)
 		{

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class QuarterFlipperBlock : Block
 {
-	public Transform grabbedBlock;
 	public bool flipped = false;
 
 	private void Awake()
@@ -12,7 +11,7 @@ public class QuarterFlipperBlock : Block
 		moveyBit = transform.Find("Arm");
 	}
 
-	public override bool CheckToActivate()
+	public override bool TickStart()
 	{
 		//add a check for blocks that may be collided with
 		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)) &&
@@ -33,34 +32,34 @@ public class QuarterFlipperBlock : Block
 		return false;
 	}
 
-	public override void Activate(float time)
+	public override void Tick(float time)
 	{
 		if (!flipped)
 		{
 			grabbedBlock.parent = moveyBit;
 			moveyBit.localEulerAngles = new Vector3(90f * time, 0, 0);
+		}
+		else
+			moveyBit.localEulerAngles = new Vector3(90f * (1 - time), 0, 0);
+	}
 
-			if (time == 1)
+	public override void TickEnd()
+	{
+		if (!flipped)
+		{
+			flipped = true;
+			if (grabbedBlock != null)
 			{
-				flipped = true;
-				if (grabbedBlock != null)
-				{
-					grabbedBlock.parent = null;
-					grabbedBlock.localScale = Vector3.one;
-					grabbedBlock.GetComponent<Block>().grabbed = false;
-					grabbedBlock = null;
-				}
+				grabbedBlock.parent = null;
+				grabbedBlock.localScale = Vector3.one;
+				grabbedBlock.GetComponent<Block>().grabbed = false;
+				grabbedBlock = null;
 			}
-
 		}
 		else
 		{
-			moveyBit.localEulerAngles = new Vector3(90f * (1 - time), 0, 0);
-			if (time == 1)
-			{
-				moveyBit.transform.localPosition = Vector3.zero;
-				flipped = false;
-			}
+			moveyBit.transform.localEulerAngles = Vector3.zero;
+			flipped = false;
 		}
 	}
 

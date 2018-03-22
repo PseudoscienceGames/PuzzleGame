@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PistonBlock : Block
 {
-	public Transform grabbedBlock;
 	public GameObject pistonBlock;
 	public bool extended = false;
 
@@ -13,7 +12,7 @@ public class PistonBlock : Block
 		moveyBit = transform.Find("Piston");
 	}
 
-	public override bool CheckToActivate()
+	public override bool TickStart()
 	{
 		//add a check for blocks that may be collided with
 		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
@@ -35,34 +34,36 @@ public class PistonBlock : Block
 		return false;
 	}
 
-	public override void Activate(float time)
+	public override void Tick(float time)
 	{
 		if (!extended)
 		{
 			moveyBit.localPosition = new Vector3(0, time, 0);
 			grabbedBlock.GetComponent<Block>().Move(transform.up, time);
-
-			if (time == 1)
-			{
-				pistonBlock.SetActive(true);
-				extended = true;
-				if (grabbedBlock != null)
-				{
-					grabbedBlock.GetComponent<Block>().grabbed = false;
-					grabbedBlock = null;
-				}
-			}
-
 		}
 		else
 		{
 			moveyBit.localPosition = new Vector3(0, (1f - time), 0);
-			if (time == 1)
+		}
+	}
+
+	public override void TickEnd()
+	{
+		if (!extended)
+		{
+			pistonBlock.SetActive(true);
+			extended = true;
+			if (grabbedBlock != null)
 			{
-				pistonBlock.SetActive(false);
-				moveyBit.transform.localPosition = Vector3.zero;
-				extended = false;
+				grabbedBlock.GetComponent<Block>().grabbed = false;
+				grabbedBlock = null;
 			}
+		}
+		else
+		{
+			pistonBlock.SetActive(false);
+			moveyBit.transform.localPosition = Vector3.zero;
+			extended = false;
 		}
 	}
 

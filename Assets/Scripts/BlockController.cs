@@ -35,6 +35,18 @@ public class BlockController : MonoBehaviour
 
 	IEnumerator Tick()
 	{
+		TickStart();
+		while (time < 1)
+		{
+			TickMiddle();
+			yield return null;
+		}
+		TickEnd();
+		yield return Tick();
+	}
+
+	void TickStart()
+	{
 		blocks.Clear();
 		blocksToActivate.Clear();
 
@@ -56,9 +68,9 @@ public class BlockController : MonoBehaviour
 		}
 
 		toDelete.Clear();
-		foreach(Block b in blocks.Values)
+		foreach (Block b in blocks.Values)
 		{
-			if (b.CheckToActivate())
+			if (b.TickStart())
 				blocksToActivate.Add(b);
 		}
 
@@ -69,18 +81,25 @@ public class BlockController : MonoBehaviour
 
 
 		time = 0;
-		while (time < 1)
+	}
+
+	void TickMiddle()
+	{
+		time += Time.deltaTime * tickSpeed;
+		if (time > 1)
+			time = 1;
+		foreach (Block b in blocksToActivate)
 		{
-			time += Time.deltaTime * tickSpeed;
-			if (time > 1)
-				time = 1;
-			foreach (Block b in blocksToActivate)
-			{
-				b.Activate(time);
-			}
-			yield return null;
+			b.Tick(time);
 		}
-		yield return Tick();
+	}
+
+	void TickEnd()
+	{
+		foreach (Block b in blocksToActivate)
+		{
+			b.TickEnd();
+		}
 	}
 
 	public void Stop()
