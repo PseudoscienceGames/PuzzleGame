@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 54329726896237086}
   m_Layer: 11
   m_Name: PistonBlock
-  m_TagString: Untagged
+  m_TagString: Col
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   grabbedBlock: {fileID: 0}
   loc: {x: 0, y: 0, z: 0}
   grabbed: 0
-  locked: 1
+  locked: 0
   color: 0
   canChangeColor: 0
   moveyBit: {fileID: 0}

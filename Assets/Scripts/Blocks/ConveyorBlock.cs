@@ -11,7 +11,7 @@ public class ConveyorBlock : Block
 
 	public override bool TickStart()
 	{
-		if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
+		if (!grabbed && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
 			!BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up + transform.forward)) &&
 			(color == 0 || BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color))
 		{
@@ -25,11 +25,12 @@ public class ConveyorBlock : Block
 
 	public override void Tick(float time)
 	{
-		grabbedBlock.GetComponent<Block>().Move(transform.forward, time);
+		grabbedBlock.GetComponent<Block>().Move(transform.forward, time, false);
 	}
 
 	public override void TickEnd()
 	{
+		base.TickEnd();
 		grabbedBlock.GetComponent<Block>().grabbed = false;
 		grabbedBlock = null;
 	}

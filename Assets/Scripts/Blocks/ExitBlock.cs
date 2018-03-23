@@ -29,6 +29,5 @@ public class ExitBlock : Block
 	{
 		successCount--;
 		BlockController.Instance.toDelete.Add(b);
-		//
 	}
 }

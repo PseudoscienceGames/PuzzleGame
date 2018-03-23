@@ -13,8 +13,7 @@ public class QuarterFlipperBlock : Block
 
 	public override bool TickStart()
 	{
-		//add a check for blocks that may be collided with
-		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)) &&
+		if (!grabbed && grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)) &&
 			!flipped && (color == 0 || BlockController.Instance.blocks[VectorToInt(loc - transform.forward)].color == color))
 		{
 			Block b = BlockController.Instance.blocks[VectorToInt(loc - transform.forward)];
@@ -45,6 +44,7 @@ public class QuarterFlipperBlock : Block
 
 	public override void TickEnd()
 	{
+		base.TickEnd();
 		if (!flipped)
 		{
 			flipped = true;

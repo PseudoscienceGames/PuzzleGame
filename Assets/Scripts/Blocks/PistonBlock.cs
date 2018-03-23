@@ -14,10 +14,8 @@ public class PistonBlock : Block
 
 	public override bool TickStart()
 	{
-		//add a check for blocks that may be collided with
-		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
-			!extended && !BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + (transform.up * 2f))) &&
-			(color == 0 || BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color))
+		if (!grabbed && grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
+			!extended && (color == 0 || BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color))
 		{
 			Block b = BlockController.Instance.blocks[VectorToInt(loc + transform.up)];
 			if (!b.grabbed && !b.locked)
@@ -39,7 +37,7 @@ public class PistonBlock : Block
 		if (!extended)
 		{
 			moveyBit.localPosition = new Vector3(0, time, 0);
-			grabbedBlock.GetComponent<Block>().Move(transform.up, time);
+			grabbedBlock.GetComponent<Block>().Move(transform.up, time, true);
 		}
 		else
 		{
@@ -49,6 +47,7 @@ public class PistonBlock : Block
 
 	public override void TickEnd()
 	{
+		base.TickEnd();
 		if (!extended)
 		{
 			pistonBlock.SetActive(true);
@@ -71,22 +70,8 @@ public class PistonBlock : Block
 	{
 		base.Reset();
 		pistonBlock.gameObject.SetActive(false);
-		//pistonBlock.transform.position = transform.position;
 		grabbedBlock = null;
 		moveyBit.localPosition = Vector3.zero;
 		extended = false;
 	}
-	//public override void Deactivate(float time)
-	//{
-	//	if (extended)
-	//	{
-	//		piston.transform.position = (piston.transform.up * (1 - time)) + transform.position;
-	//		if (time == 1)
-	//		{
-	//			extended = false;
-	//			pistonBlock.SetActive(false);
-	//		}
-	//	}
-	//}
-
 }

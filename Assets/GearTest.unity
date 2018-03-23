@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 230434671}
   m_Layer: 8
   m_Name: Plane
-  m_TagString: Untagged
+  m_TagString: Col
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1104,7 +1104,7 @@ MonoBehaviour:
   blocksToActivate: []
   toDelete: []
   time: 0
-  tickSpeed: 5
+  tickSpeed: 1
   buildMenu: {fileID: 1289901764}
   playMenu: {fileID: 1812479385}
   colorMats:
@@ -2267,6 +2267,10 @@ Prefab:
     - target: {fileID: 100000, guid: de813fb0010e8de48b93250cea6aeb70, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: de813fb0010e8de48b93250cea6aeb70, type: 3}
+      propertyPath: m_TagString
+      value: Col
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de813fb0010e8de48b93250cea6aeb70, type: 3}

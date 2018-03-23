@@ -63,6 +63,7 @@ public class BuildController : MonoBehaviour
 			yield break;
 		}
 		Vector3 initPos = selectedBlock.transform.position;
+
 		while (!Input.GetMouseButtonUp(0))
 		{
 			if (Vector2.Distance(Input.mousePosition, initMousePos) > 10)

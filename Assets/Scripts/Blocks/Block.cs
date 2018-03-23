@@ -24,12 +24,22 @@ public class Block : MonoBehaviour
 
 	public virtual void TickEnd()
 	{
-
+		grabbed = false;
 	}
 
-	public void Move(Vector3 dir, float time)
+	public void Move(Vector3 dir, float time, bool push)
 	{
 		transform.position = loc + (dir * time);
+		if (push && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + dir)) &&
+			BlockController.Instance.blocks[VectorToInt(loc + dir)].name != "InvisBlock")
+		{
+			Block b = BlockController.Instance.blocks[VectorToInt(loc + dir)];
+			b.Move(dir, time, true);
+			b.grabbed = true;
+			if (BlockController.Instance.blocksToActivate.Contains(b))
+				BlockController.Instance.blocksToActivate.Remove(b);
+		}
+
 	}
 
 	public virtual void Reset()
@@ -56,7 +66,8 @@ public class Block : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
-		if(other.transform != grabbedBlock && other.GetComponent<Block>().grabbedBlock != transform)
+		if(other.gameObject.CompareTag("Col") && other.transform != grabbedBlock
+			&& (other.GetComponent<Block>() == null || other.GetComponent<Block>().grabbedBlock != transform))
 			BlockController.Instance.CollisionWarning(this);
 	}
 }
