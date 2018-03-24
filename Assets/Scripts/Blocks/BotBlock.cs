@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BotBlock : Block
+public class BotBlock : MovableBlock
 {
 
 	//private void OnCollisionEnter(Collision collision)
@@ -25,11 +25,11 @@ public class BotBlock : Block
 		if (!grabbed)
 		{
 			if (!BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - Vector3.up)) && loc.y > 0)
-				Move(-Vector3.up, time, false);
+				Move(-Vector3.up, time);
 			else if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.up)) || VectorToInt(loc - transform.up).y < 0)
 			{
 				if (!BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.forward)))
-					Move(transform.forward, time, false);
+					Move(transform.forward, time);
 			}
 		}
 	}

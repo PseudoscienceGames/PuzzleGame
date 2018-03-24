@@ -1104,7 +1104,7 @@ MonoBehaviour:
   blocksToActivate: []
   toDelete: []
   time: 0
-  tickSpeed: 1
+  tickSpeed: 5
   buildMenu: {fileID: 1289901764}
   playMenu: {fileID: 1812479385}
   colorMats:

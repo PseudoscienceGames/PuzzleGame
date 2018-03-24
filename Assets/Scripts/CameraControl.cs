@@ -59,8 +59,8 @@ public class CameraControl : MonoBehaviour
 			if (Physics.Raycast(ray, out hit) && hit.transform.GetComponent<Block>() != null)
 			{
 				Block b = hit.transform.GetComponent<Block>();
-				if (b.canChangeColor)
-					b.CycleColor(Mathf.RoundToInt(Mathf.Sign(Input.GetAxis("Mouse ScrollWheel"))));
+				if (b.GetComponent<ManipulatorBlock>() != null)
+					b.GetComponent<ManipulatorBlock>().CycleColor(Mathf.RoundToInt(Mathf.Sign(Input.GetAxis("Mouse ScrollWheel"))));
 			}
 			else
 			{

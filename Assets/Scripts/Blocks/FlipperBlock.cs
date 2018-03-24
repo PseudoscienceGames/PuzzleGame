@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlipperBlock : Block
+public class FlipperBlock : ManipulatorBlock
 {
 	public bool flipped = false;
 
@@ -14,10 +14,11 @@ public class FlipperBlock : Block
 	public override bool TickStart()
 	{
 		//add a check for blocks that may be collided with
-		if (!grabbed && grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)) &&
-			!flipped && (color == 0 || BlockController.Instance.blocks[VectorToInt(loc - transform.forward)].color == color))
+		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.forward)) &&
+			!flipped && (color == 0 || BlockController.Instance.blocks[VectorToInt(loc - transform.forward)].color == color) &&
+			BlockController.Instance.blocks[VectorToInt(loc - transform.forward)].GetComponent<MovableBlock>() != null)
 		{
-			Block b = BlockController.Instance.blocks[VectorToInt(loc - transform.forward)];
+			MovableBlock b = BlockController.Instance.blocks[VectorToInt(loc - transform.forward)].GetComponent<MovableBlock>();
 			if (!b.grabbed)
 			{
 				grabbedBlock = b.transform;
@@ -53,7 +54,7 @@ public class FlipperBlock : Block
 			{
 				grabbedBlock.parent = null;
 				grabbedBlock.localScale = Vector3.one;
-				grabbedBlock.GetComponent<Block>().grabbed = false;
+				grabbedBlock.GetComponent<MovableBlock>().grabbed = false;
 				grabbedBlock = null;
 			}
 		}

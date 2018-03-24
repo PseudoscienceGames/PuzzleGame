@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PistonBlock : Block
+public class PistonBlock : ManipulatorBlock
 {
 	public GameObject pistonBlock;
+	public List<Block> grabbedBlocks = new List<Block>();
 	public bool extended = false;
 
 	private void Awake()
@@ -14,11 +15,12 @@ public class PistonBlock : Block
 
 	public override bool TickStart()
 	{
-		if (!grabbed && grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
-			!extended && (color == 0 || BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color))
+		if (grabbedBlock == null && BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
+			!extended && (color == 0 || BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color) &&
+			BlockController.Instance.blocks[VectorToInt(loc + transform.up)].GetComponent<MovableBlock>() != null)
 		{
-			Block b = BlockController.Instance.blocks[VectorToInt(loc + transform.up)];
-			if (!b.grabbed && !b.locked)
+			MovableBlock b = BlockController.Instance.blocks[VectorToInt(loc + transform.up)].GetComponent<MovableBlock>();
+			if (!b.grabbed)
 			{
 				grabbedBlock = b.transform;
 				b.grabbed = true;
@@ -37,7 +39,7 @@ public class PistonBlock : Block
 		if (!extended)
 		{
 			moveyBit.localPosition = new Vector3(0, time, 0);
-			grabbedBlock.GetComponent<Block>().Move(transform.up, time, true);
+			grabbedBlock.GetComponent<Block>().Move(transform.up, time);
 		}
 		else
 		{
@@ -54,7 +56,7 @@ public class PistonBlock : Block
 			extended = true;
 			if (grabbedBlock != null)
 			{
-				grabbedBlock.GetComponent<Block>().grabbed = false;
+				grabbedBlock.GetComponent<MovableBlock>().grabbed = false;
 				grabbedBlock = null;
 			}
 		}

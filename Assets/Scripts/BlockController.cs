@@ -78,8 +78,6 @@ public class BlockController : MonoBehaviour
 		{
 			DeleteBlock(b);
 		}
-
-
 		time = 0;
 	}
 
