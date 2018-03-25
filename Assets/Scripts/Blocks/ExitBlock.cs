@@ -12,7 +12,7 @@ public class ExitBlock : Block
 		if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
 			(BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color || color == 0))
 		{
-			TakeBot(BlockController.Instance.blocks[VectorToInt(loc + transform.up)]);
+			TakeBlock(BlockController.Instance.blocks[VectorToInt(loc + transform.up)]);
 			if (successCount == 0)
 				BlockController.Instance.CheckSuccess();
 		}
@@ -25,9 +25,9 @@ public class ExitBlock : Block
 		base.Reset();
 	}
 
-	void TakeBot(Block b)
+	void TakeBlock(Block b)
 	{
 		successCount--;
-		BlockController.Instance.toDelete.Add(b);
+		b.gameObject.SetActive(false);
 	}
 }

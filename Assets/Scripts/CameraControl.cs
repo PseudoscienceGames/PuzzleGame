@@ -56,7 +56,7 @@ public class CameraControl : MonoBehaviour
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 			RaycastHit hit;
-			if (Physics.Raycast(ray, out hit) && hit.transform.GetComponent<Block>() != null)
+			if (!BlockController.Instance.playing && Physics.Raycast(ray, out hit) && hit.transform.GetComponent<Block>() != null)
 			{
 				Block b = hit.transform.GetComponent<Block>();
 				if (b.GetComponent<ManipulatorBlock>() != null)

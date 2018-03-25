@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class BlockController : MonoBehaviour
 {
-	//	public List<Block> blocks = new List<Block>();
 	public Dictionary<Vector3Int, Block> blocks = new Dictionary<Vector3Int, Block>();
 	public List<Block> blocksToActivate = new List<Block>();
-	public List<Block> toDelete = new List<Block>();
 	public Dictionary<Block, TempTransform> initLocs = new Dictionary<Block, TempTransform>();
 	public float time;
 	public float tickSpeed;
 	public GameObject buildMenu;
 	public GameObject playMenu;
+	public bool playing = false;
 	public List<Material> colorMats = new List<Material>();
 
 	public static BlockController Instance;
@@ -20,6 +19,7 @@ public class BlockController : MonoBehaviour
 
 	public void Initialize()
 	{
+		playing = true;
 		BuildController.Instance.gameObject.SetActive(false);
 		buildMenu.SetActive(false);
 		playMenu.SetActive(true);
@@ -30,6 +30,7 @@ public class BlockController : MonoBehaviour
 			if (b.GetComponent<SpawnBlock>() != null)
 				b.GetComponent<SpawnBlock>().Init();
 		}
+		Debug.Log(initLocs.Count);
 		StartCoroutine(Tick());
 	}
 
@@ -66,19 +67,11 @@ public class BlockController : MonoBehaviour
 					blocks.Add(b.loc, b);
 			}
 		}
-
-		toDelete.Clear();
 		foreach (Block b in blocks.Values)
 		{
 			if (b.TickStart())
 				blocksToActivate.Add(b);
 		}
-
-		foreach (Block b in toDelete)
-		{
-			DeleteBlock(b);
-		}
-		time = 0;
 	}
 
 	void TickMiddle()
@@ -102,6 +95,7 @@ public class BlockController : MonoBehaviour
 
 	public void Stop()
 	{
+		playing = false;
 		Time.timeScale = 1;
 		StopAllCoroutines();
 		BuildController.Instance.gameObject.SetActive(true);
@@ -128,6 +122,7 @@ public class BlockController : MonoBehaviour
 
 	public void ResetBlock(Block b)
 	{
+		b.gameObject.SetActive(true);
 		b.Reset();
 		b.transform.position = initLocs[b].pos;
 		Vector3 pos = b.transform.position;

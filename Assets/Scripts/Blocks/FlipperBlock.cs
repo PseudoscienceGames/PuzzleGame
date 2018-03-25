@@ -25,8 +25,8 @@ public class FlipperBlock : ManipulatorBlock
 				b.grabbed = true;
 				if (BlockController.Instance.blocksToActivate.Contains(b))
 					BlockController.Instance.blocksToActivate.Remove(b);
+				return true;
 			}
-			return true;
 		}
 		if (flipped)
 			return true;

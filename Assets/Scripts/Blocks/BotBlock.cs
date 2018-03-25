@@ -4,22 +4,6 @@ using UnityEngine;
 
 public class BotBlock : MovableBlock
 {
-
-	//private void OnCollisionEnter(Collision collision)
-	//{
-	//	GetComponent<Rigidbody>().useGravity = true;
-	//	enabled = false;
-	//	BlockController.Instance.CollisionWarning(this);
-	//}
-
-	public override bool TickStart()
-	{
-		if (!grabbed)
-			return true;
-		else
-			return false;
-	}
-
 	public override void Tick(float time)
 	{
 		if (!grabbed)
