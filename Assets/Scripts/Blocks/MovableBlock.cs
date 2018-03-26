@@ -5,6 +5,12 @@ using UnityEngine;
 public class MovableBlock : Block
 {
 	public bool grabbed;
+	public Renderer coloredBit;
+
+	private void Awake()
+	{
+		coloredBit.material = BlockController.Instance.colorMats[color];
+	}
 
 	public override bool TickStart()
 	{

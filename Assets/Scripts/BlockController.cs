@@ -5,6 +5,7 @@ using UnityEngine;
 public class BlockController : MonoBehaviour
 {
 	public Dictionary<Vector3Int, Block> blocks = new Dictionary<Vector3Int, Block>();
+	public List<Block> testList = new List<Block>();
 	public List<Block> blocksToActivate = new List<Block>();
 	public Dictionary<Block, TempTransform> initLocs = new Dictionary<Block, TempTransform>();
 	public float time;
@@ -24,18 +25,18 @@ public class BlockController : MonoBehaviour
 		buildMenu.SetActive(false);
 		playMenu.SetActive(true);
 		initLocs.Clear();
-		foreach(Block b in GameObject.FindObjectsOfType<Block>())
+		foreach(Block b in GetComponentsInChildren<Block>(true))
 		{
-			initLocs.Add(b, new TempTransform(b.transform.root.position, b.transform.root.rotation));
+			initLocs.Add(b, new TempTransform(b.transform.position, b.transform.rotation, b.gameObject.activeSelf));
 			if (b.GetComponent<SpawnBlock>() != null)
 				b.GetComponent<SpawnBlock>().Init();
 		}
-		Debug.Log(initLocs.Count);
 		StartCoroutine(Tick());
 	}
 
 	IEnumerator Tick()
 	{
+		time = 0;
 		TickStart();
 		while (time < 1)
 		{
@@ -48,10 +49,12 @@ public class BlockController : MonoBehaviour
 
 	void TickStart()
 	{
+
 		blocks.Clear();
+		testList.Clear();
 		blocksToActivate.Clear();
 
-		foreach (Block b in GameObject.FindObjectsOfType<Block>())
+		foreach (Block b in GetComponentsInChildren<Block>(true))
 		{
 			if (b.gameObject.activeSelf)
 			{
@@ -64,7 +67,10 @@ public class BlockController : MonoBehaviour
 					CollisionWarning(b);
 				}
 				else
+				{
 					blocks.Add(b.loc, b);
+					testList.Add(b);
+				}
 			}
 		}
 		foreach (Block b in blocks.Values)
@@ -101,16 +107,11 @@ public class BlockController : MonoBehaviour
 		BuildController.Instance.gameObject.SetActive(true);
 		buildMenu.SetActive(true);
 		playMenu.SetActive(false);
-		List<Block> blocksToDelete = new List<Block>();
-		foreach(Block b in GameObject.FindObjectsOfType<Block>())
+		foreach(Block b in GetComponentsInChildren<Block>(true))
 		{
 			if (initLocs.ContainsKey(b))
 				ResetBlock(b);
-			else if(b.name != "InvisBlock")
-				blocksToDelete.Add(b);
 		}
-		foreach (Block b in blocksToDelete)
-			DeleteBlock(b);
 	}
 
 	public void DeleteBlock(Block b)
@@ -128,6 +129,7 @@ public class BlockController : MonoBehaviour
 		Vector3 pos = b.transform.position;
 		b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
 		b.transform.rotation = initLocs[b].rot;
+		b.gameObject.SetActive(initLocs[b].active);
 	}
 
 	public void CollisionWarning(Block b)
@@ -138,7 +140,7 @@ public class BlockController : MonoBehaviour
 	public void CheckSuccess()
 	{
 		bool done = true;
-		foreach(ExitBlock e in GameObject.FindObjectsOfType<ExitBlock>())
+		foreach(ExitBlock e in GetComponentsInChildren<ExitBlock>(true))
 		{
 			if (e.successCount > 0)
 				done = false;
@@ -157,11 +159,13 @@ public struct TempTransform
 {
 	public Vector3 pos;
 	public Quaternion rot;
+	public bool active;
 
-	public TempTransform(Vector3 pos, Quaternion rot)
+	public TempTransform(Vector3 pos, Quaternion rot, bool active)
 	{
 		this.pos = pos;
 		this.rot = rot;
+		this.active = active;
 	}
 }
 

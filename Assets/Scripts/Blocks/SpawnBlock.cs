@@ -6,7 +6,7 @@ public class SpawnBlock : Block
 {
 	public List<GameObject> toSpawn = new List<GameObject>();
 	List<GameObject> storedSpawn = new List<GameObject>();
-	private int wait;
+	public int wait;
 	public int waitCount;
 
 	public void Init()
@@ -22,7 +22,7 @@ public class SpawnBlock : Block
 				wait = 0;
 			if (wait == 0)
 			{
-				Instantiate(toSpawn[0], loc + transform.up, transform.rotation);
+				toSpawn[0].SetActive(true);
 				toSpawn.RemoveAt(0);
 			}
 			wait++;
@@ -35,5 +35,6 @@ public class SpawnBlock : Block
 	public override void Reset()
 	{
 		toSpawn = new List<GameObject>(storedSpawn);
+		wait = 0;
 	}
 }

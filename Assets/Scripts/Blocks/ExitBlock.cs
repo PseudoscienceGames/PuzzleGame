@@ -6,6 +6,12 @@ public class ExitBlock : Block
 {
 	public int botsNeeded;
 	public int successCount;
+	public Renderer coloredBit;
+
+	private void Awake()
+	{
+		coloredBit.material = BlockController.Instance.colorMats[color];
+	}
 
 	public override bool TickStart()
 	{
