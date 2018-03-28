@@ -54,32 +54,21 @@ public class CameraControl : MonoBehaviour
 		}
 		else if(Input.GetAxis("Mouse ScrollWheel") != 0)
 		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit hit;
-			if (!BlockController.Instance.playing && Physics.Raycast(ray, out hit) && hit.transform.GetComponent<Block>() != null)
+			//Zoom camera
+			zoom = -Camera.main.transform.localPosition.z;
+			if (zoom >= zoomMin && zoom <= zoomMax)
 			{
-				Block b = hit.transform.GetComponent<Block>();
-				if (b.GetComponent<ManipulatorBlock>() != null)
-					b.GetComponent<ManipulatorBlock>().CycleColor(Mathf.RoundToInt(Mathf.Sign(Input.GetAxis("Mouse ScrollWheel"))));
-			}
-			else
-			{
-				//Zoom camera
-				zoom = -Camera.main.transform.localPosition.z;
-				if (zoom >= zoomMin && zoom <= zoomMax)
+				if (Camera.main.orthographic)
+					Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+				else
 				{
-					if (Camera.main.orthographic)
-						Camera.main.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
-					else
-					{
-						targetZoom += -(Input.GetAxisRaw("Mouse ScrollWheel")) * zoomSpeed;
-						if (targetZoom > zoomMax)
-							targetZoom = zoomMax;
-						if (targetZoom < zoomMin)
-							targetZoom = zoomMin;
-						Vector3 zoomV = new Vector3(0, 0, -targetZoom);
-						Camera.main.transform.localPosition = Vector3.SmoothDamp(Camera.main.transform.localPosition, zoomV, ref zVelocity, zoomSmoothTime);
-					}
+					targetZoom += -(Input.GetAxisRaw("Mouse ScrollWheel")) * zoomSpeed;
+					if (targetZoom > zoomMax)
+						targetZoom = zoomMax;
+					if (targetZoom < zoomMin)
+						targetZoom = zoomMin;
+					Vector3 zoomV = new Vector3(0, 0, -targetZoom);
+					Camera.main.transform.localPosition = Vector3.SmoothDamp(Camera.main.transform.localPosition, zoomV, ref zVelocity, zoomSmoothTime);
 				}
 			}
 		}

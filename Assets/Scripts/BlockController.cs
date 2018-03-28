@@ -27,8 +27,6 @@ public class BlockController : MonoBehaviour
 		foreach(Block b in GetComponentsInChildren<Block>(true))
 		{
 			initLocs.Add(b, new TempTransform(b.transform.position, b.transform.rotation, b.gameObject.activeSelf));
-			if (b.GetComponent<SpawnBlock>() != null)
-				b.GetComponent<SpawnBlock>().Init();
 		}
 		StartCoroutine(Tick());
 	}
@@ -51,7 +49,11 @@ public class BlockController : MonoBehaviour
 
 		blocks.Clear();
 		blocksToActivate.Clear();
-
+		foreach (ExitBlock b in GetComponentsInChildren<ExitBlock>(true))
+		{
+			if (!blocks.ContainsValue(b.GetComponent<Block>()))
+				CheckBlock(b);
+		}
 		foreach (PistonBlock b in GetComponentsInChildren<PistonBlock>(true))
 		{
 			if(!blocks.ContainsValue(b.GetComponent<Block>()))
@@ -153,7 +155,7 @@ public class BlockController : MonoBehaviour
 		bool done = true;
 		foreach(ExitBlock e in GetComponentsInChildren<ExitBlock>(true))
 		{
-			if (e.successCount > 0)
+			if (e.grabbedBlock != null)
 				done = false;
 		}
 		if (done)

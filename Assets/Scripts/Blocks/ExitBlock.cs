@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ExitBlock : Block
+public class ExitBlock : ManipulatorBlock
 {
-	public int botsNeeded;
-	public int successCount;
 	public Renderer coloredBit;
 
 	private void Awake()
@@ -19,21 +17,24 @@ public class ExitBlock : Block
 			(BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color || color == 0))
 		{
 			TakeBlock(BlockController.Instance.blocks[VectorToInt(loc + transform.up)]);
-			if (successCount == 0)
-				BlockController.Instance.CheckSuccess();
 		}
 		return false;
 	}
 
 	public override void Reset()
 	{
-		successCount = botsNeeded;
 		base.Reset();
+		if (grabbedBlock != null)
+		{
+			grabbedBlock.GetComponent<MovableBlock>().grabbed = false;
+			grabbedBlock = null;
+		}
 	}
 
 	void TakeBlock(Block b)
 	{
-		successCount--;
-		b.gameObject.SetActive(false);
+		BlockController.Instance.CheckSuccess();
+		grabbedBlock = b.transform;
+		b.GetComponent<MovableBlock>().grabbed = true;
 	}
 }
