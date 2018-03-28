@@ -13,7 +13,7 @@ public class BotBlock : MovableBlock
 	{
 		if (!grabbed)
 		{
-			if (!BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - Vector3.up)) && loc.y > 0)
+			if (!BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - Vector3.up)))// && loc.y > 0)
 				Move(-Vector3.up, time);
 			else if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc - transform.up)) || VectorToInt(loc - transform.up).y < 0)
 			{
