@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class ConveyorBlock : ManipulatorBlock
 {
+	public Renderer coloredBit;
+
 	private void Awake()
 	{
+		coloredBit.material = BlockController.Instance.colorMats[color];
 		moveyBit = transform.Find("Belt");
 	}
 

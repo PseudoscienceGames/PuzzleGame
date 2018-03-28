@@ -8,8 +8,11 @@ public class PistonBlock : ManipulatorBlock
 	public List<MovableBlock> grabbedBlocks = new List<MovableBlock>();
 	public bool extended = false;
 
+	public Renderer coloredBit;
+
 	private void Awake()
 	{
+		coloredBit.material = BlockController.Instance.colorMats[color];
 		moveyBit = transform.Find("Piston");
 	}
 

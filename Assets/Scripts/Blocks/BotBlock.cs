@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BotBlock : MovableBlock
 {
+	private void Awake()
+	{
+		coloredBit.material = BlockController.Instance.colorMats[color];
+	}
+
 	public override void Tick(float time)
 	{
 		if (!grabbed)

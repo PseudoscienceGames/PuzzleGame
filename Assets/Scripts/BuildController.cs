@@ -15,11 +15,6 @@ public class BuildController : MonoBehaviour
 
 	public void Update()
 	{
-		if (Input.GetKeyUp(KeyCode.Delete) && selectedBlock != null)
-		{
-			DestroyImmediate(selectedBlock.gameObject);
-			Deselect();
-		}
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, 200, rotMask))
@@ -51,7 +46,7 @@ public class BuildController : MonoBehaviour
 		Vector2 initMousePos = Input.mousePosition;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
-		if (Physics.Raycast(ray, out hit, 200, blockOnly))
+		if (Physics.Raycast(ray, out hit, 200, blockOnly) && !hit.transform.GetComponent<Block>().locked)
 		{
 			selectedBlock = hit.transform;
 			selectedBlock.transform.GetComponent<BoxCollider>().enabled = false;
