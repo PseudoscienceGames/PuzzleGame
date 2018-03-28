@@ -224,11 +224,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b1fd388c223b340a7c85c6fb7b5651, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grabbedBlock: {fileID: 0}
   loc: {x: 0, y: 0, z: 0}
-  grabbed: 0
-  locked: 0
   color: 0
-  canChangeColor: 1
   moveyBit: {fileID: 0}
+  grabbedBlock: {fileID: 0}
   flipped: 0
+  angle: 180

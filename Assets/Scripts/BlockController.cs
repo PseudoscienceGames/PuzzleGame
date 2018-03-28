@@ -5,7 +5,6 @@ using UnityEngine;
 public class BlockController : MonoBehaviour
 {
 	public Dictionary<Vector3Int, Block> blocks = new Dictionary<Vector3Int, Block>();
-	public List<Block> testList = new List<Block>();
 	public List<Block> blocksToActivate = new List<Block>();
 	public Dictionary<Block, TempTransform> initLocs = new Dictionary<Block, TempTransform>();
 	public float time;
@@ -51,32 +50,43 @@ public class BlockController : MonoBehaviour
 	{
 
 		blocks.Clear();
-		testList.Clear();
 		blocksToActivate.Clear();
 
+		foreach (PistonBlock b in GetComponentsInChildren<PistonBlock>(true))
+		{
+			if(!blocks.ContainsValue(b.GetComponent<Block>()))
+				CheckBlock(b);
+		}
+		foreach (FlipperBlock b in GetComponentsInChildren<FlipperBlock>(true))
+		{
+			if (!blocks.ContainsValue(b.GetComponent<Block>()))
+				CheckBlock(b);
+		}
+		foreach (ConveyorBlock b in GetComponentsInChildren<ConveyorBlock>(true))
+		{
+			if (!blocks.ContainsValue(b.GetComponent<Block>()))
+				CheckBlock(b);
+		}
 		foreach (Block b in GetComponentsInChildren<Block>(true))
 		{
-			if (b.gameObject.activeSelf)
-			{
-				Vector3 pos = b.transform.position;
-				b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
-				b.transform.position = b.loc;
-				if (blocks.ContainsKey(b.loc))
-				{
-					Debug.Log(b.name + " " + blocks[b.loc].name);
-					CollisionWarning(b);
-				}
-				else
-				{
-					blocks.Add(b.loc, b);
-					testList.Add(b);
-				}
-			}
+			if (!blocks.ContainsValue(b.GetComponent<Block>()))
+				CheckBlock(b);
 		}
 		foreach (Block b in blocks.Values)
 		{
 			if (b.TickStart())
 				blocksToActivate.Add(b);
+		}
+	}
+
+	void CheckBlock(Block b)
+	{
+		if (b.gameObject.activeSelf)
+		{
+			Vector3 pos = b.transform.position;
+			b.loc = new Vector3Int(Mathf.RoundToInt(pos.x), Mathf.RoundToInt(pos.y), Mathf.RoundToInt(pos.z));
+			b.transform.position = b.loc;
+			blocks.Add(b.loc, b);
 		}
 	}
 
@@ -134,6 +144,7 @@ public class BlockController : MonoBehaviour
 
 	public void CollisionWarning(Block b)
 	{
+		Debug.Log(b.name);
 		StopAllCoroutines();
 	}
 

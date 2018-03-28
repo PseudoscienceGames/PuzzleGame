@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlipperBlock : ManipulatorBlock
 {
 	public bool flipped = false;
+	public float angle;
 
 	private void Awake()
 	{
@@ -38,10 +39,10 @@ public class FlipperBlock : ManipulatorBlock
 		if (!flipped)
 		{
 			grabbedBlock.parent = moveyBit;
-			moveyBit.localEulerAngles = new Vector3(180f * time, 0, 0);
+			moveyBit.localEulerAngles = new Vector3(angle * time, 0, 0);
 		}
 		else
-			moveyBit.localEulerAngles = new Vector3(180f * (1 - time), 0, 0);
+			moveyBit.localEulerAngles = new Vector3(angle * (1 - time), 0, 0);
 	}
 
 	public override void TickEnd()
@@ -52,7 +53,7 @@ public class FlipperBlock : ManipulatorBlock
 			flipped = true;
 			if (grabbedBlock != null)
 			{
-				grabbedBlock.parent = null;
+				grabbedBlock.parent = BlockController.Instance.transform;
 				grabbedBlock.localScale = Vector3.one;
 				grabbedBlock.GetComponent<MovableBlock>().grabbed = false;
 				grabbedBlock = null;
@@ -68,7 +69,13 @@ public class FlipperBlock : ManipulatorBlock
 	public override void Reset()
 	{
 		base.Reset();
-		grabbedBlock = null;
+		if (grabbedBlock != null)
+		{
+			grabbedBlock.parent = BlockController.Instance.transform;
+			grabbedBlock.localScale = Vector3.one;
+			grabbedBlock.GetComponent<MovableBlock>().grabbed = false;
+			grabbedBlock = null;
+		}
 		moveyBit.localEulerAngles = Vector3.zero;
 		flipped = false;
 	}

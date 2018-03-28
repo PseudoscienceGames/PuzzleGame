@@ -30,7 +30,7 @@ public class PistonBlock : ManipulatorBlock
 				if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + (transform.up * length))))
 				{
 					b = BlockController.Instance.blocks[VectorToInt(loc + (transform.up * length))];
-					if (b.GetComponent<MovableBlock>() == null)
+					if (b.GetComponent<MovableBlock>() == null || b.GetComponent<MovableBlock>().grabbed)
 						return false;
 					else
 						grabbedBlocks.Add(b.GetComponent<MovableBlock>());
@@ -38,6 +38,8 @@ public class PistonBlock : ManipulatorBlock
 				}
 				else
 				{
+					foreach (MovableBlock b2 in grabbedBlocks)
+						b2.grabbed = true;
 					keepChecking = false;
 					return true;
 				}
@@ -63,15 +65,15 @@ public class PistonBlock : ManipulatorBlock
 	public override void TickEnd()
 	{
 		base.TickEnd();
+		foreach(MovableBlock b in grabbedBlocks)
+		{
+			b.grabbed = false;
+		}
+		grabbedBlocks.Clear();
 		if (!extended)
 		{
 			pistonBlock.SetActive(true);
 			extended = true;
-			if (grabbedBlock != null)
-			{
-				grabbedBlock.GetComponent<MovableBlock>().grabbed = false;
-				grabbedBlock = null;
-			}
 		}
 		else
 		{

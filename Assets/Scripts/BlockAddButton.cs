@@ -9,6 +9,7 @@ public class BlockAddButton : MonoBehaviour
 	public void AddBlock()
 	{
 		Transform b = (Instantiate(block) as GameObject).transform;
+		b.parent = BlockController.Instance.transform;
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 		RaycastHit hit;
 		if (Physics.Raycast(ray, out hit, 200, BuildController.Instance.blockAndSurface))
