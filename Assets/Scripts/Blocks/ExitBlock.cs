@@ -14,6 +14,7 @@ public class ExitBlock : ManipulatorBlock
 	public override bool TickStart()
 	{
 		if (BlockController.Instance.blocks.ContainsKey(VectorToInt(loc + transform.up)) &&
+			BlockController.Instance.blocks[VectorToInt(loc + transform.up)].GetComponent<MovableBlock>() != null &&
 			(BlockController.Instance.blocks[VectorToInt(loc + transform.up)].color == color || color == 0))
 		{
 			TakeBlock(BlockController.Instance.blocks[VectorToInt(loc + transform.up)]);
